@@ -1,0 +1,41 @@
+image:
+  dist: ubuntu
+  name: ubuntu18-python3-R36
+  location: local
+  tar: ubuntu18-python3-R36-1.0.tar.gz
+
+packages:
+  manager: apt
+  system:
+    - git
+    - htop
+    - build-essential
+    - libcurl4-gnutls-dev
+    - libxml2-dev
+    - libssl-dev
+
+run:    
+  - command: R
+    args:
+      - -e
+    content: |-
+      install.packages(c("BiocManager", "Seurat", "ggplot2", "devtools"))
+
+  - command: pip3
+    args:
+      - install
+      - tensorflow
+      - ivis
+      - scikit-learn
+      - pandas
+      - numpy
+      - matplotlib
+      - lab-ml
+
+service:
+  name: ubuntu18-datascience  
+  ip: 10.0.0.30
+  resources:
+    ram: 4GB
+    cpu: 16
+  version: 1.0
