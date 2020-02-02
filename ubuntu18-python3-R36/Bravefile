@@ -31,8 +31,9 @@ run:
   - command: apt-get
     args:
       - update
-  - command: apt
+  - command: apt-get
     args:
+      - -y
       - install
       - r-base
 
@@ -46,7 +47,7 @@ run:
 
 service:
   name: ubuntu18-python3-R36
-  ip: 10.0.0.10  
+  ip: 10.0.0.20  
   resources:
     ram: 2GB
     cpu: 2
