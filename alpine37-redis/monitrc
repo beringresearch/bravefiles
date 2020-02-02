@@ -1,0 +1,7 @@
+check host redis.host with address 127.0.0.1
+      if failed port 6379 protocol redis then alert
+check process redis-server with pidfile "/var/run/redis/redis.pid"
+    start program = "/etc/init.d/redis start"
+    stop program = "/etc/init.d/redis stop"
+    if failed host 127.0.0.1 port 6379 then restart
+    if 5 restarts within 5 cycles then timeout
