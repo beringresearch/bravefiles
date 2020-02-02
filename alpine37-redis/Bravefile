@@ -68,7 +68,7 @@ run:
       - all
 
 service:
-  name: redis-service
+  name: redis-alpine37
   version: 1.0
   ip: 10.0.0.20
   ports:
