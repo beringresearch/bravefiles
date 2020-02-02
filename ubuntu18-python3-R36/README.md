@@ -24,6 +24,6 @@ brave build
 ## Running container
 
 ``` bash
-brave run -i ubuntu18-python3-R36-1.0.tar.gz -n ubuntu18-python3-R36
+brave start -i ubuntu18-python3-R36-1.0.tar.gz -n ubuntu18-python3-R36
 lxc exec braveai:ubuntu18-python3-R36 -- bash
 ```
