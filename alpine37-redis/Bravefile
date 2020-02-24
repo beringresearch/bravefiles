@@ -74,5 +74,5 @@ service:
   ports:
     - 6379:6379
   resources:
-    ram: 2GB
-    cpu: 1
+    ram: 8GB
+    cpu: 2
