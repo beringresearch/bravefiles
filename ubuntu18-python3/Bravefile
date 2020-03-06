@@ -23,10 +23,10 @@ run:
       - --upgrade
       - pip
       - setuptools
+      - virtualenv
 
 service:
-  name: ubuntu18-python3  
-  ip: 10.0.0.10  
+  name: ubuntu18-python3   
   resources:
     ram: 2GB
     cpu: 2
