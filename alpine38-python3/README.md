@@ -9,7 +9,7 @@
 ## Installation
 
 ``` bash
-brave base -n alpine38
+brave base alpine/3.8/amd64
 brave build
 ```
 

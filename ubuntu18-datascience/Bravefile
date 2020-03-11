@@ -24,8 +24,7 @@ run:
   - command: pip3
     args:
       - install
-      - tensorflow
-      - ivis
+      - ivis[cpu]
       - scikit-learn
       - pandas
       - numpy

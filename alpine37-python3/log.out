@@ -1,0 +1,31 @@
+2020/02/25 08:25:41 Fail to connect to LXD: Get https://192.168.64.3:8443/1.0: Unable to connect to: 192.168.64.3:8443%%%1
+Starting brave-ai%%%0
+2020/02/25 08:28:40 Failed to import image: open /Users/ignat/.bravetools/images/brave-base-alpine37-1.0.tar: no such file or directory%%%1
+Image imported%%%0
+Unit launched:  alpine37-python3%%%0
+Executing command:  alpine37-python3 [apk update]%%%0
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz%%%0
+ERROR: http://dl-cdn.alpinelinux.org/alpine/v3.7/main: DNS lookup error%%%1
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz%%%0
+ERROR: http://dl-cdn.alpinelinux.org/alpine/v3.7/community: DNS lookup error%5%1
+v3.7.3-180-g5372bc29f3 [http://dl-cdn.alpinelinux.org/alpine/v3.7/main]T%%%0
+v3.7.3-165-g0f7ecd696d [http://dl-cdn.alpinelinux.org/alpine/v3.7/community]%%%0
+2 errors; 9052 distinct packages available%%%1
+Executing command:  alpine37-python3 [apk --no-cache add bash gcc g++ python3 python3-dev openblas-dev]%%%0
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz%%%0
+WARNING: Ignoring http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz: DNS lookup error%%%1
+WARNING: Ignoring http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz: DNS lookup error%%%1
+ERROR: unsatisfiable constraints:%%%1
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz%%%0
+  g++ (missing):%%%1
+    required by: world[g++]%%%0
+  gcc (missing):%%%1
+    required by: world[gcc]%%%0
+  openblas-dev (missing):%%%1
+    required by: world[openblas-dev]%%%0
+  python3 (missing):%%%1
+    required by: world[python3]%%%0
+  python3-dev (missing):%%%1
+    required by: world[python3-dev]%%%0
+Executing command:  alpine37-python3 [python3 -m ensurepip]%%%0
+Executing command:  alpine37-python3 [pip3 --no-cache-dir install --upgrade pip setuptools]%%%0

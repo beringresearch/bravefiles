@@ -1,0 +1,11 @@
+image:
+  dist: alpine
+  name: alpine/3.8/amd64
+  location: images
+packages:
+  manager: apk
+  system:
+    - nginx
+service:
+  name: brave-base-nginx
+  version: 1.0

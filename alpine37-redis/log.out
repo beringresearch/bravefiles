@@ -1,0 +1,57 @@
+Image imported,0
+Unit launched:  redis-alpine37,0
+Executing command:  redis-alpine37 [apk update],0
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz,0
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz,0
+v3.7.3-180-g5372bc29f3 [http://dl-cdn.alpinelinux.org/alpine/v3.7/main],0
+v3.7.3-165-g0f7ecd696d [http://dl-cdn.alpinelinux.org/alpine/v3.7/community],0
+OK: 9052 distinct packages available,0
+Executing command:  redis-alpine37 [apk --no-cache add redis],0
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/main/x86_64/APKINDEX.tar.gz,0
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.7/community/x86_64/APKINDEX.tar.gz,0
+(1/1) Installing redis (4.0.14-r0),0
+Executing redis-4.0.14-r0.pre-install,0
+Executing busybox-1.27.2-r11.trigger,0
+OK: 19 MiB in 26 packages,0
+Executing command:  redis-alpine37 [mkdir -p ],0
+mkdir: can't create directory '': No such file or directory,1
+Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/monitrc to  (file)Executing command:  redis-alpine37 [mkdir -p /etc/],0
+2020/02/24 17:39:29 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/.DS_Store to /etc/.DS_Store (file),0
+2020/02/24 17:39:29 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/Bravefile to /etc/Bravefile (file),0
+2020/02/24 17:39:29 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/README.md to /etc/README.md (file),0
+2020/02/24 17:39:29 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/log.out to /etc/log.out (file),0
+2020/02/24 17:39:29 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/monitrc to /etc/monitrc (file),0
+Executing command:  redis-alpine37 [mkdir -p ],0
+mkdir: can't create directory '': No such file or directory,1
+2020/02/24 17:39:30 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/.DS_Store to .DS_Store (file),0
+2020/02/24 17:39:30 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/Bravefile to Bravefile (file),0
+2020/02/24 17:39:30 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/README.md to README.md (file),0
+2020/02/24 17:39:30 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/log.out to log.out (file),0
+2020/02/24 17:39:30 Pushing /Users/ignat/Documents/git/bravefiles/alpine37-redis/monitrc to monitrc (file),0
+Executing command:  redis-alpine37 [bash -c chown root:root /etc/monitrc && chmod 0700 /etc/monitrc],0
+Executing command:  redis-alpine37 [mkdir /data],0
+Executing command:  redis-alpine37 [chown -R redis:redis /data],0
+Executing command:  redis-alpine37 [sed -i 's#logfile /var/log/redis/redis.log#logfile ""#i' /etc/redis.conf],0
+sed: unsupported command ',1
+Executing command:  redis-alpine37 [sed -i 's#daemonize yes#daemonize no#i' /etc/redis.conf],0
+sed: unsupported command ',1
+Executing command:  redis-alpine37 [sed -i 's#dir /var/lib/redis/#dir /data#i' /etc/redis.conf],0
+sed: unsupported command ',1
+Executing command:  redis-alpine37 [echo -e "# placeholder for local options\n" > /etc/redis-local.conf],0
+"# placeholder for local options,0
+" > /etc/redis-local.conf,0
+Executing command:  redis-alpine37 [echo -e "include /etc/redis-local.conf\n" >> /etc/redis.conf],0
+"include /etc/redis-local.conf,0
+" >> /etc/redis.conf,0
+Executing command:  redis-alpine37 [monit reload],0
+Reinitializing monit daemon,0
+Executing command:  redis-alpine37 [sleep 20],0
+Executing command:  redis-alpine37 [monit restart all],0
+Monit: the monit HTTP interface is not enabled, please add the 'set httpd' statement and use the 'allow' option to allow monit to connect,1
+Publishing unit ...,0
+Exporting archive ...,0
+Image exported,0
+Cleaning ...,0
+Image deleted. Fingerprint:  49514c6d486bad23daae96d9e1f27d9be77e2897f7e2ef162c87459ec3988ea5,0
+Image deleted. Fingerprint:  0cfbcf0661272c552dea4dafc05069bcd5ed3a00b884b6427beeaa5fa5375987,0
+Finalising ...,0

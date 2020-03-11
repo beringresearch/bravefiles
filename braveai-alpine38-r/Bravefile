@@ -1,0 +1,76 @@
+image:
+  dist: alpine
+  name: alpine/3.8/amd64
+  location: images
+packages:
+  manager: apk
+  system:
+    - bash
+    - mongodb
+    - mongodb-tools
+    - R
+    - R-dev
+    - libc-dev
+    - g++
+    - libexecinfo-dev
+    - wget
+    - openblas
+    - libstdc++
+    - libgomp
+    - git
+    - make
+    - gfortran
+  run:
+    - command: R
+      args:
+        - -e
+      content: |-
+        install.packages(c('Matrix', 'data.table', 'magrittr', 'stringi'), repos = 'http://cran.us.r-project.org')
+  
+    - command: ash
+      args:
+        - -c
+      content: |-
+        mkdir /src &&
+        cd /src &&
+        git clone --recursive https://github.com/beringresearch/xgboost &&
+        sed -i '/#define DMLC_LOG_STACK_TRACE 1/d' /src/xgboost/dmlc-core/include/dmlc/base.h &&
+        sed -i '/#define DMLC_LOG_STACK_TRACE 1/d' /src/xgboost/rabit/include/dmlc/base.h &&
+        ln -s locale.h /usr/include/xlocale.h &&
+        cd /src/xgboost; make -j4 &&
+        cd /src/xgboost/R-package &&
+        R CMD INSTALL . &&
+        cd **
+        rm /usr/include/xlocale.h &&
+        rm -rf /src
+  
+    - command: R
+      args:
+        - -e
+      content: |-
+        install.packages('devtools', repos = 'http://cran.us.r-project.org')
+  
+    - command: R
+      args:
+        - -e
+      content: |-
+        install.packages('Rcpp', repos='https://beringresearch.github.io/drat')
+  
+    - command: R
+      args:
+        - -e
+      content: |-
+        install.packages('Rserve',,'http://rforge.net/',type='source')
+  
+    - command: monit
+      args:
+        - reload
+      content:
+    - command: monit
+      args:
+        - restart
+        - all
+      content:
+service:
+  name: brave-base-r
+  version: 1.0

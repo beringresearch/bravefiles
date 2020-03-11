@@ -1,0 +1,41 @@
+image:
+  dist: alpine
+  name: alpine/3.8/amd64
+  location: images
+packages:
+  manager: apk
+  system:
+    - monit
+    - bash
+    - gcc
+    - g++
+    - python3
+    - python3-dev
+    - git
+    - openblas-dev
+    - chromium
+run:
+  - command: rc-update
+    args:
+      - add
+      - monit
+ 
+  - command: rc-service
+    args:
+      - monit
+      - start
+  
+  - command: python3
+    args:
+      - -m
+      - ensurepip
+  - command: pip3
+    args:
+      - --no-cache-dir
+      - install
+      - --upgrade
+      - pip
+      - setuptools
+service:
+  name: brave-base-chromium
+  version: 1.0
