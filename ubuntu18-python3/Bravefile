@@ -1,8 +1,7 @@
-image:
+base:
   dist: ubuntu
-  name: brave-base-ubuntu18-1.0
-  location: local
-  tar: brave-base-ubuntu18-1.0.tar.gz
+  image: ubuntu/bionic/amd64
+  location: public 
 
 packages:
   manager: apt

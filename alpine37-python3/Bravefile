@@ -1,8 +1,6 @@
-image:
-  dist: alpine
-  name: brave-base-alpine37-1.0
-  location: local
-  tar: brave-base-alpine37-1.0.tar.gz
+base:
+  image: alpine/3.7/amd64
+  location: public
 
 packages:
   manager: apk
