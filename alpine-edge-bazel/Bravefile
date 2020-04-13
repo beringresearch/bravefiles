@@ -1,0 +1,91 @@
+base:
+  image: alpine/edge/amd64
+  location: public
+packages:
+  manager: apk
+  system:
+  - python3
+  - python3-tkinter
+  - py3-numpy
+  - py3-numpy-f2py
+  - freetype
+  - libpng
+  - libjpeg-turbo
+  - imagemagick
+  - graphviz
+  - git
+run:
+- command: apk
+  args:
+  - add
+  - --no
+  - --no-cache
+  - --virtual=.build-deps
+  - bash
+  - cmake
+  - curl
+  - freetype-dev
+  - g++
+  - libjpeg-turbo-dev
+  - libpng-dev
+  - libpng-dev
+  - make
+  - musl-dev
+  - openblas-dev
+  - openjdk8
+  - patch
+  - perl
+  - python3-dev
+  - py3-numpy
+  - rsync
+  - sed
+  - swig
+  - zip
+- command: python3
+  args:
+  - -m
+  - ensurepip
+- command: pip3
+  args:
+  - --no-cache-dir
+  - install
+  - --upgrade
+  - pip
+  - setuptools
+  - wheel
+- command: export
+  args:
+  - JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+- command: echo
+  args:
+  - $JAVA_HOME
+- command: bash
+  args:
+  - -c
+  - |-
+    curl -SLO https://github.com/bazelbuild/bazel/archive/3.0.0.zip &&
+    unzip 3.0.0.zip
+- command: rm
+  args:
+  - 3.0.0.zip
+- command: bash
+  args:
+  - -c
+  - sed -i -e 's/-classpath/-J-Xmx8192m -J-Xms128m -classpath/g' bazel-3.0.0/scripts/bootstrap/compile.sh
+- command: bash
+  args:
+  - bazel-3.0.0/compile.sh
+- command: cp
+  args:
+  - -p
+  - bazel-3.0.0/output/bazel
+  - /usr/bin/
+service:
+  name: alpine-edge-bazel
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: ""
+    cpu: 0
+    gpu: false

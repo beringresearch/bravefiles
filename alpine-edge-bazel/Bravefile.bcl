@@ -1,0 +1,34 @@
+// Install Google Bazel build tool
+
+base {
+	image:    "alpine/edge/amd64"
+	location: "public"
+}
+
+system {
+  apk:  ["bash", "curl", "openjdk8", "gcc", "g++",
+         "linux-headers", "zip", "python3-dev"]
+}
+
+run {
+  // Set up environment variables and aliases
+  ln:  "-s /usr/bin/python3 /usr/bin/python"
+  export: "JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/"
+  
+  // Install Bazel  
+  bash:    ["-c", "curl -SLO https://github.com/bazelbuild/bazel/releases/download/3.0.0/bazel-3.0.0-dist.zip"] 
+
+  unzip:  "bazel-3.0.0-dist.zip" 
+
+  bash:   ["-c", "sed -i -e 's/-classpath/-J-Xmx8192m -J-Xms128m -classpath/g' scripts/bootstrap/compile.sh"]
+  bash: ["-c", "EXTRA_BAZEL_ARGS=--host_javabase=@local_jdk//:jdk ./compile.sh"]
+  cp:   "output/bazel /usr/bin/"
+
+  // Clean up
+  rm: "-r *" 
+}
+
+service {
+	name:     "alpine-edge-bazel"
+	version:  "1.0"
+}
