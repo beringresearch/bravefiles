@@ -1,0 +1,29 @@
+// Alpine Tensorflow Image
+// - python3
+
+base {
+	image:    "alpine-tensorflow-1.0"
+	location: "local"
+}
+
+system {
+  apk:  ["python3", "python3-tkinter", "py3-numpy",
+         "py3-numpy-f2py", "freetype", "libpng",
+         "libjpeg-turbo",  "imagemagick", "graphviz", "git"]
+}
+
+run {
+  apk:  `add --no --no-cache --virtual=.build-deps
+bash cmake curl freetype-dev g++ libjpeg-turbo-dev libpng-dev libpng-dev
+make musl-dev openblas-dev openjdk8 patch perl python3-dev py3-numpy
+rsync sed swig zip`
+
+  python3:  "-m ensurepip"
+  pip3:     "--no-cache-dir install --upgrade pip setuptools wheel"
+  bash:    ["-c", "curl -SL https://github.com/tensorflow/tensorflow/archive/v1.15.2.tar.gz | tar xzf -"]
+}
+
+service                                     {
+	name:     "alpine-tensorflow"
+	version:  "2.0"
+}
