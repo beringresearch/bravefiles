@@ -1,0 +1,64 @@
+// Alpine Tensorflow Image
+// - python3
+
+base {
+	image:    "alpine-edge-bazel-0.27.1"
+	location: "local"
+}
+
+system {
+  apk:  ["git", "patch", "py-pip", "musl",
+         "py3-numpy", "py3-numpy-dev", "libexecinfo-dev"]
+}
+
+run {
+  // Set environment variables
+  echo: `ALPINE_GLIBC_BASE_URL=https://github.com/sgerrand/alpine-pkg-glibc/releases/download" >> /etc/profile`
+  echo: `ALPINE_GLIBC_PACKAGE_VERSION=2.30-r0 >> etc/profile`
+  echo: `ALPINE_GLIBC_BASE_PACKAGE_FILENAME=glibc-2.30-r0.apk >> etc/profile`
+  echo: `ALPINE_GLIBC_BIN_PACKAGE_FILENAME=glibc-bin-2.30-r0.apk >> etc/profile`
+
+  echo: `"-----BEGIN PUBLIC KEY-----\
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZ2u1KJKUu/fW4A25y9m\
+        y70AGEa/J3Wi5ibNVGNn1gT1r0VfgeWd0pUybS4UmcHdiNzxJPgoWQhV2SSW1JYu\
+        tOqKZF5QSN6X937PTUpNBjUvLtTQ1ve1fp39uf/lEXPpFpOPL88LKnDBgbh7wkCp\
+        m2KzLVGChf83MS0ShL6G9EQIAUxLm99VpgRjwqTQ/KfzGtpke1wqws4au0Ab4qPY\
+        KXvMLSPLUp7cfulWvhmZSegr5AdhNw5KNizPqCJT8ZrGvgHypXyiFvvAH5YRtSsc\
+        Zvo9GI2e2MaZyo9/lvb+LbLEJZKEQckqRj4P26gmASrZEPStwc+yqy1ShHLA0j6m\
+        1QIDAQAB\
+        -----END PUBLIC KEY-----" | sed 's/   */\n/g' > "/etc/apk/keys/sgerrand.rsa.pub" && \
+    wget -q "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
+         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME"`
+
+  apk: ["add", "--no-cache", `"$ALPINE_GLIBC_BASE_PACKAGE_FILENAME"`]
+  apk: ["add", "--no-cache", ` "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME"`]
+  rm: ["-f", "/etc/apk/keys/sgerrand.rsa.pub", "/root/.wget-hsts", `"$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME"`, `"$ALPINE_GLIBC_BIN_PACKAGE_FILENAME"`]
+ 
+
+  // Install pip dependencies
+  pip: "install --no-cache-dir six wheel setuptools mock 'future>=0.17.1'"
+  pip: "install --no-cache-dir keras_applications --no-deps" 
+  pip: "install --no-cache-dir keras_preprocessing --no-deps"
+
+  // Install tensorflow
+  git: "clone https://github.com/tensorflow/tensorflow.git"
+  bash: ["-c",
+'cd tensorflow && \
+git checkout r2.1 && \
+JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/ ./configure
+']
+
+  // Alpine doesn't have sys/sysctl.h...let's pretend it does!
+  ln "-s /usr/include/linux/sysctl.h /usr/include/sys/sysctl.h"
+
+  
+  bash: ["-c",
+"JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/ bazel build //tensorflow/tools/pip_package"]
+
+
+}
+
+service {
+	name:     "alpine-tensorflow"
+	version:  "2.1.0"
+}

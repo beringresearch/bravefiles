@@ -1,0 +1,25 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+    apt: 		["wget"]
+}
+
+run {
+	wget: 		"https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+  bash:     "Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda"
+}
+
+service {
+	name:		"ubuntu-bionic-miniconda3"
+	version:	"1.0"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	false
+	}
+}

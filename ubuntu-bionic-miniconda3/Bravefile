@@ -1,0 +1,26 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - wget
+run:
+- command: wget
+  args:
+  - https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+- command: bash
+  args:
+  - Miniconda3-latest-Linux-x86_64.sh
+  - -b
+  - -p
+  - $HOME/miniconda
+service:
+  name: ubuntu-bionic-miniconda3
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false
