@@ -1,0 +1,141 @@
+base:
+  image: alpine/edge/amd64
+  location: public
+packages:
+  manager: apk
+  system:
+  - lapack
+run:
+- command: apk
+  args:
+  - update
+- command: apk
+  args:
+  - upgrade
+- command: ash
+  args:
+  - -c
+  - |-
+    echo http://dl-cdn.alpinelinux.org/alpine/edge/main | tee /etc/apk/repositories && \
+    echo http://dl-cdn.alpinelinux.org/alpine/edge/testing | tee -a /etc/apk/repositories  && \
+    echo http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories
+- command: apk
+  args:
+  - add
+  - --no-cache
+  - curl
+  - ca-certificates
+  - python3
+  - py3-numpy
+  - py3-scipy
+  - py3-scikit-learn
+- command: apk
+  args:
+  - add
+  - --no-cache
+  - py3-numpy-f2py
+  - freetype
+  - jpeg
+  - libpng
+  - libstdc++
+- command: apk
+  args:
+  - add
+  - --no-cache
+  - libgomp
+  - graphviz
+  - font-noto
+- command: ash
+  args:
+  - -c
+  - |-
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 --no-cache-dir install --upgrade pip setuptools wheel && \
+    ln -s locale.h /usr/include/xlocale.h
+- command: apk
+  args:
+  - add
+  - --no-cache
+  - --virtual=.build-deps
+  - gcc
+  - musl-dev
+  - libffi-dev
+  - gfortran
+  - openblas-dev
+  - py3-numpy-dev
+  - freetype-dev
+  - libpng-dev
+  - build-base
+  - linux-headers
+  - python3-dev
+  - git
+  - cmake
+  - jpeg-dev
+  - bash
+- command: pip3
+  args:
+  - install
+  - -U
+  - --no-cache-dir
+  - Cython
+  - pyyaml
+  - pymkl
+  - cffi
+  - matplotlib
+  - ipywidgets
+  - notebook
+  - requests
+  - pillow
+  - pandas
+  - seaborn
+- command: rm
+  args:
+  - /usr/include/xlocale.h
+- command: rm
+  args:
+  - -rf
+  - /root/.cache
+- command: rm
+  args:
+  - -rf
+  - /root/.[acpw]*
+- command: rm
+  args:
+  - -rf
+  - /var/cache/apk/*
+- command: ash
+  args:
+  - -c
+  - find /usr/lib/python3.6 -name __pycache__ | xargs rm -r
+- command: jupyter
+  args:
+  - nbextension
+  - enable
+  - --py
+  - widgetsnbextension
+- command: mkdir
+  args:
+  - -p
+  - ~/.ipython/profile_default/startup/
+- command: ash
+  args:
+  - -c
+  - echo "import warnings" >> ~/.ipython/profile_default/startup/config.py
+- command: ash
+  args:
+  - -c
+  - echo "warnings.filterwarnings('ignore')" >> ~/.ipython/profile_default/startup/config.py
+- command: ash
+  args:
+  - -c
+  - echo "c.NotebookApp.token = u''" >> ~/.ipython/profile_default/startup/config.py
+service:
+  name: alpine-edge-mlbase
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false

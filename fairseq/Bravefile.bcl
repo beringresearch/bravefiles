@@ -1,0 +1,40 @@
+//Install FAIR's Detectron2 framework for semantic image segmentation
+base {
+	image: 		  "ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+  apt: 		  ["ca-certificates",
+             "python3-dev", "git", "wget", "sudo", "g++",
+             "cmake", "protobuf-compiler", "libprotobuf-dev"]
+}
+
+run { 
+  ln:         "-sv /usr/bin/python3 /usr/bin/python" 
+  bash:      ["-c", `wget https://bootstrap.pypa.io/get-pip.py && \
+python3 get-pip.py --user &&
+rm get-pip.py
+`]
+  bash:      ["-c", `/root/.local/bin/pip install --user tensorboard cython`]
+  //bash:      ["-c", `/root/.local/bin/pip install --user torch==1.5+cu101 torchvision==0.6+cu101 -f https://download.pytorch.org/whl/torch_stable.html`]
+  bash:      ["-c" `/root/.local/bin/pip install torch==1.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html`]   
+  bash:      ["-c", `/root/.local/bin/pip install --user fairseq`] 
+
+  // Install additional python packages
+  bash:      ["-c", `/root/.local/bin/pip install --user pandas notebook scikit-learn matplotlib fastBPE sacremoses`]
+
+}
+
+
+service {
+	name:		"fairseq"
+	version:	"1.0"
+	ip: 		"10.0.0.10"
+  ports:  "8888:8888"
+	resources {
+		ram: 	"4GB"
+		cpu: 	4
+		gpu:	false
+	}
+}

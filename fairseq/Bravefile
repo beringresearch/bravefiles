@@ -4,12 +4,12 @@ base:
 packages:
   manager: apt
   system:
-  - python3-opencv
   - ca-certificates
   - python3-dev
   - git
   - wget
   - sudo
+  - g++
   - cmake
   - protobuf-compiler
   - libprotobuf-dev
@@ -33,25 +33,18 @@ run:
 - command: bash
   args:
   - -c
-  - /root/.local/bin/pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+  - /root/.local/bin/pip install torch==1.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 - command: bash
   args:
   - -c
-  - /root/.local/bin/pip install --user 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+  - /root/.local/bin/pip install --user fairseq
 - command: bash
   args:
   - -c
-  - /root/.local/bin/pip install --user 'git+https://github.com/facebookresearch/fvcore'
-- command: bash
-  args:
-  - -c
-  - root/.local/bin/pip install --user detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cpu/index.html
-- command: bash
-  args:
-  - -c
-  - /root/.local/bin/pip install --user pandas notebook scikit-learn matplotlib
+  - /root/.local/bin/pip install --user pandas notebook scikit-learn matplotlib fastBPE
+    sacremoses
 service:
-  name: detectron
+  name: fairseq
   version: "1.0"
   ip: 10.0.0.10
   ports:

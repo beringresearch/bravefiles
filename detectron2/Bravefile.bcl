@@ -32,10 +32,11 @@ rm get-pip.py
 service {
 	name:		"detectron"
 	version:	"1.0"
-	ip: 		""
+	ip: 		"10.0.0.10"
+  ports:  "8888:8888"
 	resources {
 		ram: 	"4GB"
-		cpu: 	2
+		cpu: 	4
 		gpu:	false
 	}
 }

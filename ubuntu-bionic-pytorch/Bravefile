@@ -1,0 +1,49 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - ca-certificates
+  - python3-dev
+  - git
+  - wget
+  - sudo
+  - g++
+  - cmake
+  - protobuf-compiler
+  - libprotobuf-dev
+run:
+- command: ln
+  args:
+  - -sv
+  - /usr/bin/python3
+  - /usr/bin/python
+- command: bash
+  args:
+  - -c
+  - |
+    wget https://bootstrap.pypa.io/get-pip.py && \
+    python3 get-pip.py --user &&
+    rm get-pip.py
+- command: bash
+  args:
+  - -c
+  - /root/.local/bin/pip install --user tensorboard cython
+- command: bash
+  args:
+  - -c
+  - /root/.local/bin/pip install torch==1.5+cpu -f https://download.pytorch.org/whl/torch_stable.html
+- command: bash
+  args:
+  - -c
+  - /root/.local/bin/pip install --user ipython pandas notebook scikit-learn matplotlib
+service:
+  name: pytorch
+  version: "1.5"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false

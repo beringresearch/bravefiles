@@ -1,0 +1,36 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: "public"
+}
+
+system {
+   apt: 		 ["ca-certificates",
+             "python3-dev", "git", "wget", "sudo", "g++",
+             "cmake", "protobuf-compiler", "libprotobuf-dev"]
+}
+
+run { 
+  ln:         "-sv /usr/bin/python3 /usr/bin/python" 
+  bash:      ["-c", `wget https://bootstrap.pypa.io/get-pip.py && \
+python3 get-pip.py --user &&
+rm get-pip.py
+`]
+  bash:      ["-c", `/root/.local/bin/pip install --user tensorboard cython`]
+  //bash:      ["-c", `/root/.local/bin/pip install --user torch==1.5+cu101 torchvision==0.6+cu101 -f https://download.pytorch.org/whl/torch_stable.html`]
+  bash:      ["-c" `/root/.local/bin/pip install torch==1.5+cpu -f https://download.pytorch.org/whl/torch_stable.html`]   
+ 
+// Install additional python packages
+  bash:      ["-c", `/root/.local/bin/pip install --user ipython pandas notebook scikit-learn matplotlib`]
+}
+
+service {
+	name:		"pytorch"
+	version:	"1.5"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	false
+	}
+}
