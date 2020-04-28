@@ -33,14 +33,13 @@ ln -s locale.h /usr/include/xlocale.h`]
   rm: "-rf /root/.cache"
   rm: "-rf /root/.[acpw]*"
   rm: "-rf /var/cache/apk/*"
-  
-  ash: ["-c", `find /usr/lib/python3.6 -name __pycache__ | xargs rm -r`]
+   
   jupyter: "nbextension enable --py widgetsnbextension"
   
-  mkdir: "-p ~/.ipython/profile_default/startup/"
-  ash: ["-c", `echo "import warnings" >> ~/.ipython/profile_default/startup/config.py`]
-  ash: ["-c", `echo "warnings.filterwarnings('ignore')" >> ~/.ipython/profile_default/startup/config.py`]
-  ash: ["-c", `echo "c.NotebookApp.token = u''" >> ~/.ipython/profile_default/startup/config.py`]
+  ash: ["-c", "mkdir -p /root/.ipython/profile_default/startup/"]
+  ash: ["-c", `echo "import warnings" >> /root/.ipython/profile_default/startup/config.py`]
+  ash: ["-c", `echo "warnings.filterwarnings('ignore')" >> /root/.ipython/profile_default/startup/config.py`]
+  ash: ["-c", `echo "c.NotebookApp.token = u''" >> /root/.ipython/profile_default/startup/config.py`]
   
 }
 

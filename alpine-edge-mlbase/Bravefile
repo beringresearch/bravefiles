@@ -104,32 +104,28 @@ run:
   args:
   - -rf
   - /var/cache/apk/*
-- command: ash
-  args:
-  - -c
-  - find /usr/lib/python3.6 -name __pycache__ | xargs rm -r
 - command: jupyter
   args:
   - nbextension
   - enable
   - --py
   - widgetsnbextension
-- command: mkdir
-  args:
-  - -p
-  - ~/.ipython/profile_default/startup/
 - command: ash
   args:
   - -c
-  - echo "import warnings" >> ~/.ipython/profile_default/startup/config.py
+  - mkdir -p /root/.ipython/profile_default/startup/
 - command: ash
   args:
   - -c
-  - echo "warnings.filterwarnings('ignore')" >> ~/.ipython/profile_default/startup/config.py
+  - echo "import warnings" >> /root/.ipython/profile_default/startup/config.py
 - command: ash
   args:
   - -c
-  - echo "c.NotebookApp.token = u''" >> ~/.ipython/profile_default/startup/config.py
+  - echo "warnings.filterwarnings('ignore')" >> /root/.ipython/profile_default/startup/config.py
+- command: ash
+  args:
+  - -c
+  - echo "c.NotebookApp.token = u''" >> /root/.ipython/profile_default/startup/config.py
 service:
   name: alpine-edge-mlbase
   version: "1.0"
