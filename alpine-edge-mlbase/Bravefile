@@ -110,22 +110,6 @@ run:
   - enable
   - --py
   - widgetsnbextension
-- command: ash
-  args:
-  - -c
-  - mkdir -p /root/.ipython/profile_default/startup/
-- command: ash
-  args:
-  - -c
-  - echo "import warnings" >> /root/.ipython/profile_default/startup/config.py
-- command: ash
-  args:
-  - -c
-  - echo "warnings.filterwarnings('ignore')" >> /root/.ipython/profile_default/startup/config.py
-- command: ash
-  args:
-  - -c
-  - echo "c.NotebookApp.token = u''" >> /root/.ipython/profile_default/startup/config.py
 service:
   name: alpine-edge-mlbase
   version: "1.0"

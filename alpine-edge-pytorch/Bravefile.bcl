@@ -1,0 +1,25 @@
+// Lightweight PyTorch-cpu environment
+base {
+	image: 		"alpine-edge-mlbase-1.0"
+	location: "local"
+}
+
+system {
+    apk: []	
+}
+
+run {
+  pip3: "install torch==1.5.0+cpu torchvision==0.6.0+cpu -f https://download.pytorch.org/whl/torch_stable.html"
+  pip3: "install tensorboard"
+}
+
+service {
+	name:		"pytorch"
+	version:	"1.5.0"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	false
+	}
+}
