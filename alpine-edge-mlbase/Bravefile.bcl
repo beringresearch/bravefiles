@@ -1,11 +1,19 @@
-//BCL File example
+//Alpine environment for machine learning
+//
+//Image: Alpine Edge
+//Packages:
+// -python3
+// -scikit-learn
+// -matplotlib
+// -jupyter notebooks
+
 base {
 	image: 		  "alpine/edge/amd64"
 	location: 	"public"
 }
 
 system {
-  apk: 		["lapack"]
+  apk: 	["lapack"]
 }
 
 run {
