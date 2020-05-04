@@ -1,0 +1,27 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: "public"
+}
+
+system {
+   apt: 		 ["ca-certificates", "python3", "python3-pip",
+             "python3-dev", "git", "wget", "sudo", "g++",
+             "cmake"]
+}
+
+run { 
+  // Install useufl python packages
+  pip3:      "install --user ipython pandas notebook scikit-learn matplotlib"
+}
+
+service {
+	name:		"ubuntu-bionic-py3"
+	version:	"1.0"
+	ip: 		""
+	resources {
+		ram: 	"8GB"
+		cpu: 	4
+		gpu:	false
+	}
+}
