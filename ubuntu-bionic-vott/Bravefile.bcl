@@ -1,0 +1,31 @@
+//BCL File example
+base {
+	image: 		  "ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+  apt: 		   ["git", "g++", "curl"] 
+}
+
+
+run {
+  curl:       "-sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh"
+  bash:       "./nodesource_setup.sh"
+  bash:      ["-c", "sudo apt-get install -y nodejs build-essential"]
+	git: 	    	"clone https://github.com/Microsoft/VoTT.git"
+  bash:      ["-c",
+`cd /root/VoTT && \
+npm ci`]
+}
+
+service {
+	name:		    "ubuntu-bionic-vott"
+	version:	  "1.0"
+	ports: 		"3000:3000"
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	false
+	}
+}

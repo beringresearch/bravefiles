@@ -1,0 +1,43 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - git
+  - g++
+  - curl
+run:
+- command: curl
+  args:
+  - -sL
+  - https://deb.nodesource.com/setup_10.x
+  - -o
+  - nodesource_setup.sh
+- command: bash
+  args:
+  - ./nodesource_setup.sh
+- command: bash
+  args:
+  - -c
+  - sudo apt-get install -y nodejs build-essential
+- command: git
+  args:
+  - clone
+  - https://github.com/Microsoft/VoTT.git
+- command: bash
+  args:
+  - -c
+  - |-
+    cd /root/VoTT && \
+    npm ci
+service:
+  name: ubuntu-bionic-vott
+  version: "1.0"
+  ip: ""
+  ports:
+  - 3000:3000
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false
