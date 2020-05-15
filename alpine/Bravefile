@@ -1,0 +1,52 @@
+base:
+  image: alpine/edge/amd64
+  location: public
+packages:
+  manager: apk
+  system:
+  - bash
+  - curl
+  - openjdk8
+  - gcc
+  - g++
+  - linux-headers
+  - zip
+  - python3-dev
+run:
+- command: ln
+  args:
+  - -s
+  - /usr/bin/python3
+  - /usr/bin/python
+- command: bash
+  args:
+  - -c
+  - |-
+    curl -SLO https://github.com/bazelbuild/bazel/releases/download/0.27.1/bazel-0.27.1-dist.zip && \
+    unzip bazel-0.27.1-dist.zip
+- command: bash
+  args:
+  - -c
+  - sed -i -e 's/-classpath/-J-Xmx8192m -J-Xms128m -classpath/g' scripts/bootstrap/compile.sh
+- command: bash
+  args:
+  - -c
+  - JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/ EXTRA_BAZEL_ARGS=--host_javabase=@local_jdk//:jdk
+    ./compile.sh
+- command: cp
+  args:
+  - output/bazel
+  - /usr/bin/
+- command: bash
+  args:
+  - -c
+  - rm -r *
+service:
+  name: alpine-edge-bazel
+  version: 0.27.1
+  ip: ""
+  ports: []
+  resources:
+    ram: ""
+    cpu: 0
+    gpu: false
