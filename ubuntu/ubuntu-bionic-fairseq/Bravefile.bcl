@@ -16,8 +16,7 @@ run {
 python3 get-pip.py --user &&
 rm get-pip.py
 `]
-  bash:      ["-c", `/root/.local/bin/pip install --user tensorboard cython`]
-  //bash:      ["-c", `/root/.local/bin/pip install --user torch==1.5+cu101 torchvision==0.6+cu101 -f https://download.pytorch.org/whl/torch_stable.html`]
+  bash:      ["-c", `/root/.local/bin/pip install --user tensorboard cython`] 
   bash:      ["-c" `/root/.local/bin/pip install torch==1.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html`]   
   bash:      ["-c", `/root/.local/bin/pip install --user fairseq`] 
 
@@ -28,7 +27,7 @@ rm get-pip.py
 
 
 service {
-	name:		"fairseq"
+	name:		"ubuntu-bionic-fairseq"
 	version:	"1.0"
 	ip: 		"10.0.0.10"
   ports:  "8888:8888"

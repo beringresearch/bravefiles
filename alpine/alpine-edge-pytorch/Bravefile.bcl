@@ -1,7 +1,7 @@
 // Lightweight PyTorch-cpu environment
 base {
-	image: 		"alpine-edge-mlbase-1.0"
-	location: "local"
+	image: 		"beringresearch/bravefiles/alpine/alpine-edge-mlbase"
+	location: "github"
 }
 
 system {
