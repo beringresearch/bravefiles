@@ -13,7 +13,7 @@ base {
 
 system {
     apk: 		  ["R", "R-dev", "R-doc", "build-base", "linux-headers",
-"libxml2", "libxml2-dev"]
+"libxml2", "libxml2-dev", "bash"]
 }
 
 run {

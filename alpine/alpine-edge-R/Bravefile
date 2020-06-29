@@ -11,6 +11,7 @@ packages:
   - linux-headers
   - libxml2
   - libxml2-dev
+  - bash
 run:
 - command: ash
   args:
