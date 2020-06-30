@@ -47,7 +47,7 @@ run:
 - command: bash
   args:
   - -c
-  - Rscript -e 'install.packages(c("ggrepel"))'
+  - Rscript -e 'install.packages(c("ggrepel", "ggthemes"))'
 service:
   image: ""
   name: ubuntu-bionic-r

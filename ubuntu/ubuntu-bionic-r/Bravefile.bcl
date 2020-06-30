@@ -25,7 +25,7 @@ run {
   bash:        ["-c", `echo 'options(repos = c("cloud.r-project.org",
 "http://cran.rstudio.com"))' > ~/.Rprofile`]
   bash:        ["-c", `Rscript -e 'install.packages(c("data.table", "devtools", "ggplot2", "reshape2", "BiocManager", "Rcpp"))'`]
-  bash:        ["-c", `Rscript -e 'install.packages(c("ggrepel"))'`]
+  bash:        ["-c", `Rscript -e 'install.packages(c("ggrepel", "ggthemes"))'`]
 	
 }
 
