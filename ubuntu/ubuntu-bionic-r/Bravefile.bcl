@@ -1,0 +1,41 @@
+// Ubuntu 18.0
+// Included R packages:
+// BiocManager
+// data.table
+// devtools
+// ggplot2
+// Rcpp
+
+base {
+	image: 		  "ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+    apt: 		  ["libxml2", "libxml2-dev", "bash", "curl", "libssl-dev",
+               "libcurl4-openssl-dev", "apt-transport-https", "software-properties-common", "build-essential"]
+}
+
+run {
+  bash:        ["-c", "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9"]
+  bash:        ["-c", "add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/'"]
+  bash:        ["-c", "apt update"]
+  bash:        ["-c", "apt upgrade"]
+  bash:        ["-c", "apt install -y r-base"]
+  bash:        ["-c", `echo 'options(repos = c("cloud.r-project.org",
+"http://cran.rstudio.com"))' > ~/.Rprofile`]
+  bash:        ["-c", `Rscript -e 'install.packages(c("data.table", "devtools", "ggplot2", "reshape2", "BiocManager", "Rcpp"))'`]
+  bash:        ["-c", `Rscript -e 'install.packages(c("ggrepel"))'`]
+	
+}
+
+service {
+	name:	    	"ubuntu-bionic-r"
+	version:	  "1.0"
+	ip: 		    ""
+	resources {
+		ram: 	    "4GB"
+		cpu: 	    2
+		gpu:	    false
+	}
+}

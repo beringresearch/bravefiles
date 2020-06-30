@@ -1,0 +1,60 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - libxml2
+  - libxml2-dev
+  - bash
+  - curl
+  - libssl-dev
+  - libcurl4-openssl-dev
+  - apt-transport-https
+  - software-properties-common
+  - build-essential
+run:
+- command: bash
+  args:
+  - -c
+  - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+- command: bash
+  args:
+  - -c
+  - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/'
+- command: bash
+  args:
+  - -c
+  - apt update
+- command: bash
+  args:
+  - -c
+  - apt upgrade
+- command: bash
+  args:
+  - -c
+  - apt install -y r-base
+- command: bash
+  args:
+  - -c
+  - |-
+    echo 'options(repos = c("cloud.r-project.org",
+    "http://cran.rstudio.com"))' > ~/.Rprofile
+- command: bash
+  args:
+  - -c
+  - Rscript -e 'install.packages(c("data.table", "devtools", "ggplot2", "reshape2", "BiocManager", "Rcpp"))'
+- command: bash
+  args:
+  - -c
+  - Rscript -e 'install.packages(c("ggrepel"))'
+service:
+  image: ""
+  name: ubuntu-bionic-r
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false
