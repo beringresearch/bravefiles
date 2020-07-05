@@ -14,7 +14,11 @@ run:
 - command: bash
   args:
   - -c
-  - python3 -m pip install --upgrade tensorflow
+  - python3 -m pip install --upgrade pip
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons tensorflow-io
 - command: bash
   args:
   - -c
