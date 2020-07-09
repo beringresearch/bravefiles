@@ -10,6 +10,10 @@ packages:
   - git
   - sudo
   - g++
+  - wget
+  - texlive-xetex
+  - texlive-fonts-recommended
+  - texlive-generic-recommended
 run:
 - command: bash
   args:
@@ -28,7 +32,6 @@ run:
   - -c
   - python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn notebook ipython ivis streamlit
 service:
-  image: ""
   name: ubuntu-bionic-mlbase
   version: "1.0"
   ip: ""

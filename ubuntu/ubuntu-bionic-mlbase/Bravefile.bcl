@@ -5,7 +5,8 @@ base {
 }
 
 system {
-  apt: 		["bash", "python3-dev", "python3-pip", "git", "sudo", "g++"]
+  apt: 		["bash", "python3-dev", "python3-pip", "git", "sudo", "g++", "wget",
+           "texlive-xetex", "texlive-fonts-recommended", "texlive-generic-recommended"]
 }
 
 run {
