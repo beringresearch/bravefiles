@@ -1,0 +1,46 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+run:
+- command: bash
+  args:
+  - -c
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- command: bash
+  args:
+  - -c
+  - |-
+    sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+- command: sudo
+  args:
+  - apt-get
+  - update
+- command: sudo
+  args:
+  - apt-get
+  - install
+  - -y
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+service:
+  name: ubuntu-bionic-docker
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false
