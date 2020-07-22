@@ -1,0 +1,45 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - git
+  - sudo
+  - tmux
+  - curl
+  - cmake
+  - python3-dev
+  - build-essential
+  - wget
+run:
+- command: curl
+  args:
+  - -fLo
+  - /root/.vim/autoload/plug.vim
+  - --create-dirs
+  - https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+- command: bash
+  args:
+  - -c
+  - |-
+    git clone https://github.com/beringresearch/dotfiles && \
+    cp dotfiles/.vimrc . && \
+    cp dotfiles/.tmux.conf . && \
+    rm -r dotfiles
+- command: vim
+  args:
+  - +PlugInstall
+  - +qall
+  - '>'
+  - /dev/null
+service:
+  name: ubuntu-bionic-vim
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: false

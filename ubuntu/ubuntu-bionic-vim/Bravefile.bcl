@@ -1,0 +1,36 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+  apt: 		["bash", "git", "sudo", "tmux", "curl", "cmake",
+           "python3-dev", "build-essential", "wget"] 
+}
+
+run {
+  // Configure vim
+  curl: "-fLo /root/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  bash: ["-c",
+`git clone https://github.com/beringresearch/dotfiles && \
+cp dotfiles/.vimrc . && \
+cp dotfiles/.tmux.conf . && \
+rm -r dotfiles`]
+  vim: "+PlugInstall +qall > /dev/null"
+  //bash: ["-c",
+//`cd /root/.vim/plugged/YouCompleteMe && \
+//python3 install.py --all`]
+}
+
+service {
+	name:		"ubuntu-bionic-vim"
+	version:	"1.0"
+	ip: 		""
+  resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	false
+  }
+}
+
