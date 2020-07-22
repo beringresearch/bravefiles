@@ -21,10 +21,11 @@ stable"`]
 }
 
 service {
+  docker: "yes"
 	name:		"ubuntu-bionic-docker"
 	version:	"1.0"
 	ip: 		""
-  	resources {
+  resources {
 		ram: 	"4GB"
 		cpu: 	2
 		gpu:	false

@@ -37,6 +37,7 @@ run:
   - containerd.io
 service:
   name: ubuntu-bionic-docker
+  docker: "yes"
   version: "1.0"
   ip: ""
   ports: []
