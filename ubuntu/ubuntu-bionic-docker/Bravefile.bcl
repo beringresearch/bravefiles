@@ -26,8 +26,8 @@ service {
 	version:	"1.0"
 	ip: 		""
   resources {
-		ram: 	"4GB"
-		cpu: 	2
+		ram: 	"32GB"
+		cpu: 	40
 		gpu:	false
 	}
 }
