@@ -6,6 +6,8 @@ packages:
   system:
   - bash
 service:
+  image: ubuntu-bionic-gpu
+  name: ubuntu-bionic-gpu
   docker: "no"
   version: "1.0"
   ip: ""
@@ -14,13 +16,3 @@ service:
     ram: 4GB
     cpu: 2
     gpu: "no"
-  postdeploy:
-    run:
-    - command: echo
-      args:
-      - Hello
-      - World
-    copy:
-    - source: /file/or/directory
-      target: /file/or/directory
-      action: chmod 0700 /file/or/directory
