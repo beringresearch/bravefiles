@@ -10,13 +10,13 @@ system {
 
 service {
 	docker:    "no"
-	image:		 "ubuntu-bionic-gpu"
+	image:		 "ubuntu-bionic-gpu-1.0"
 	name:		   "ubuntu-bionic-gpu"
 	version:	 "1.0"
 	ip: 		   ""
   resources {
 		ram: 	"4GB"
 		cpu: 	2
-		gpu:	"no"
+		gpu:	"yes"
 	}
 }
