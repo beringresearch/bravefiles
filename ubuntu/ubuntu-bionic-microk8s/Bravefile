@@ -1,0 +1,53 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - vim
+  - snapd
+run:
+- command: sudo
+  args:
+  - snap
+  - install
+  - microk8s
+  - --classic
+- command: sudo
+  args:
+  - microk8s
+  - kubectl
+  - create
+  - deployment
+  - microbot
+  - --image=dontrebootme/microbot:v1
+- command: sudo
+  args:
+  - microk8s
+  - kubectl
+  - expose
+  - deployment
+  - microbot
+  - --type=NodePort
+  - --port=80
+  - --name=microbot-service
+- command: sudo
+  args:
+  - microk8s
+  - kubectl
+  - get
+  - service
+  - microbot-service
+service:
+  image: ubuntu-bionic-microk8s-1.0
+  name: ubuntu-bionic-microk8s
+  docker: "yes"
+  version: "1.0"
+  ip: ""
+  ports:
+  - ""
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"
