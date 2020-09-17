@@ -6,7 +6,7 @@ base {
 
 system {
   apt: 		["bash", "python3-dev", "python3-pip", "git", "sudo", "g++", "wget", "tmux", "curl",
-           "texlive-xetex", "texlive-fonts-recommended", "texlive-generic-recommended"]
+           "texlive-xetex", "texlive-fonts-recommended", "texlive-generic-recommended", "pandoc"]
 }
 
 run {
@@ -31,7 +31,7 @@ service {
   resources {
 		ram: 	"4GB"
 		cpu: 	2
-		gpu:	false
+		gpu:	"no"
   }
 }
 

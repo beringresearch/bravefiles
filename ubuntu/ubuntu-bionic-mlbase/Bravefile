@@ -16,6 +16,7 @@ packages:
   - texlive-xetex
   - texlive-fonts-recommended
   - texlive-generic-recommended
+  - pandoc
 run:
 - command: curl
   args:
@@ -55,4 +56,4 @@ service:
   resources:
     ram: 4GB
     cpu: 2
-    gpu: false
+    gpu: "no"
