@@ -10,8 +10,7 @@ system {
 }
 
 run {
-  bash: ["-c", 'python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn notebook ipython ivis streamlit']
-  // Configure vimi
+  bash: ["-c", 'python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn notebook ipython ivis streamlit'] 
   curl: "-fLo /root/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   bash: ["-c",
 `git clone https://github.com/beringresearch/dotfiles && \
@@ -20,8 +19,7 @@ cp dotfiles/.tmux.conf . && \
 rm -r dotfiles`]
 
   bash: ["-c", "python3 -m pip install --upgrade pip"]
-  bash: ["-c", "python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons tensorflow-io"]
-  bash: ["-c", 'python3 -m pip install torch==1.5+cu101 torchvision==0.6+cu101 -f https://download.pytorch.org/whl/torch_stable.html']
+  bash: ["-c", "python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons tensorflow-io"] 
 }
 
 service {
