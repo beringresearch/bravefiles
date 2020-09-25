@@ -10,6 +10,7 @@ system {
 }
 
 run {
+  bash: ["-c", 'python3 -m pip install --upgrade pip']
   bash: ["-c", 'python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn notebook ipython ivis streamlit'] 
   curl: "-fLo /root/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   bash: ["-c",
