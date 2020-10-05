@@ -17,11 +17,16 @@ packages:
   - texlive-fonts-recommended
   - texlive-generic-recommended
   - pandoc
+  - supervisor
 run:
 - command: bash
   args:
   - -c
   - python3 -m pip install --upgrade pip
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install git+https://github.com/beringresearch/datasets
 - command: bash
   args:
   - -c
@@ -48,11 +53,22 @@ run:
   args:
   - -c
   - python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons tensorflow-io
+- command: supervisorctl
+  args:
+  - reload
+- command: supervisorctl
+  args:
+  - update
+copy:
+- source: jupyter-server.conf
+  target: /etc/supervisor/conf.d
 service:
+  image: ubuntu-bionic-mlbase-1.0
   name: ubuntu-bionic-mlbase
   version: "1.0"
   ip: ""
-  ports: []
+  ports:
+  - 8888:8888
   resources:
     ram: 4GB
     cpu: 2
