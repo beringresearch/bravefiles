@@ -1,0 +1,43 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+  apt: 		["wget", "software-properties-common"]
+}
+
+run {
+  bash: ["-c", "sudo add-apt-repository -y ppa:graphics-drivers"]
+  bash: ["-c", "sudo apt-key adv --fetch-keys  http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub"]
+  bash: ["-c", `echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list`]
+  bash: ["-c", `echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list`]
+  bash: ["-c", "sudo apt update"]
+
+  bash: ["-c", "sudo apt-get install -y cuda-toolkit-10-1"]
+
+  bash: ["-c", `sudo apt-get install -y libcudnn7=7.6.5.32-1+cuda10.1  \
+    libcudnn7-dev=7.6.5.32-1+cuda10.1`]
+
+  bash: ["-c", `sudo apt-get install -y --no-install-recommends libnvinfer6=6.0.1-1+cuda10.1 \
+    libnvinfer-dev=6.0.1-1+cuda10.1 \
+    libnvinfer-plugin6=6.0.1-1+cuda10.1`]
+
+
+  bash: ["-c", `echo "export PATH=/usr/local/cuda-10.1/bin:$PATH" >> ~/.bashrc`]
+  bash: ["-c", `echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc`]	
+}
+
+service {
+	docker: "no"
+	image:	"ubuntu-bionic-cuda-101-1.0"
+	name:		"ubuntu-bionic-cuda-101"
+	version:	"1.0"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"yes"
+	}
+}
