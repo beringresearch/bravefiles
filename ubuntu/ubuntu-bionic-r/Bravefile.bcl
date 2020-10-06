@@ -26,16 +26,18 @@ run {
 "http://cran.rstudio.com"))' > ~/.Rprofile`]
   bash:        ["-c", `Rscript -e 'install.packages(c("data.table", "devtools", "ggplot2", "reshape2", "BiocManager", "Rcpp"))'`]
   bash:        ["-c", `Rscript -e 'install.packages(c("ggrepel", "ggthemes"))'`]
-	
+  bash:        ["-c", `Rscript -e 'install.packages(c("Seurat", "dplyr"))'`]
+
 }
 
 service {
 	name:	    	"ubuntu-bionic-r"
+  image:  "ubuntu-bionic-r-1.0"
 	version:	  "1.0"
 	ip: 		    ""
 	resources {
 		ram: 	    "4GB"
 		cpu: 	    2
-		gpu:	    false
+		gpu:	    "no"
 	}
 }

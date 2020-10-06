@@ -48,8 +48,12 @@ run:
   args:
   - -c
   - Rscript -e 'install.packages(c("ggrepel", "ggthemes"))'
+- command: bash
+  args:
+  - -c
+  - Rscript -e 'install.packages(c("Seurat", "dplyr"))'
 service:
-  image: ""
+  image: ubuntu-bionic-r-1.0
   name: ubuntu-bionic-r
   version: "1.0"
   ip: ""
@@ -57,4 +61,4 @@ service:
   resources:
     ram: 4GB
     cpu: 2
-    gpu: false
+    gpu: "no"
