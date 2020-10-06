@@ -1,6 +1,6 @@
 base:
-  image: ubuntu/bionic/amd64
-  location: public
+  image: ubuntu-bionic-r-1.0
+  location: local
 packages:
   manager: apt
   system:
@@ -53,6 +53,10 @@ run:
   args:
   - -c
   - sudo gdebi --non-interactive rstudio-server-1.3.1073-amd64.deb
+- command: bash
+  args:
+  - -c
+  - sudo adduser rstudio
 service:
   image: ubuntu-bionic-rstudio-server-1.0
   name: ubuntu-bionic-rstudio-server
@@ -65,9 +69,3 @@ service:
     ram: 4GB
     cpu: 4
     gpu: "no"
-  postdeploy:
-    run:
-    - command: bash
-      args:
-      - -c
-      - sudo adduser rstudio
