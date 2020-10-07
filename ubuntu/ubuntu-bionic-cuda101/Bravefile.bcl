@@ -25,8 +25,8 @@ run {
     libnvinfer-plugin6=6.0.1-1+cuda10.1`]
 
 
-  bash: ["-c", `echo "export PATH=/usr/local/cuda-10.1/bin:$PATH" >> ~/.bashrc`]
-  bash: ["-c", `echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc`]	
+  bash: ["-c", `echo "export PATH=/usr/local/cuda/bin:$PATH" >> ~/.bashrc`]
+  bash: ["-c", `echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc`]	
 }
 
 service {

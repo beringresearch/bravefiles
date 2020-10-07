@@ -26,7 +26,7 @@ run {
 "http://cran.rstudio.com"))' > ~/.Rprofile`]
   bash:        ["-c", `Rscript -e 'install.packages(c("data.table", "devtools", "ggplot2", "reshape2", "BiocManager", "Rcpp"))'`]
   bash:        ["-c", `Rscript -e 'install.packages(c("ggrepel", "ggthemes"))'`]
-  bash:        ["-c", `Rscript -e 'install.packages(c("Seurat", "dplyr"))'`]
+  bash:        ["-c", `Rscript -e 'install.packages(c("Seurat", "dplyr", "readr"))'`]
 
 }
 

@@ -47,11 +47,11 @@ run:
 - command: bash
   args:
   - -c
-  - echo "export PATH=/usr/local/cuda-10.1/bin:$PATH" >> ~/.bashrc
+  - echo "export PATH=/usr/local/cuda/bin:$PATH" >> ~/.bashrc
 - command: bash
   args:
   - -c
-  - echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc
+  - echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc
 service:
   image: ubuntu-bionic-cuda-101-1.0
   name: ubuntu-bionic-cuda-101

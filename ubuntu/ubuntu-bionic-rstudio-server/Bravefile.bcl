@@ -33,11 +33,6 @@ service {
 	image:	"ubuntu-bionic-rstudio-server-1.0"
 	name:		"ubuntu-bionic-rstudio-server"
 	version:	"1.0"
-  //postdeploy {
-  //  run {
-  //      bash: ["-c", "sudo adduser rstudio"]
-  //  }
-  //}
 	ports: 		"8787:8787"
 	resources {
 		ram: 	"4GB"
