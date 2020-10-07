@@ -1,42 +1,34 @@
 //Install FAIR's Detectron2 framework for semantic image segmentation
 base {
-	image: 		  "ubuntu/bionic/amd64"
-	location: 	"public"
+	image: 		  "beringresearch/bravefiles/ubuntu/ubuntu-bionic-mlbase"
+	location: 	"github"
 }
 
 system {
-  apt: 		  ["python3-opencv", "ca-certificates", "python3-dev", "git", "wget", "sudo",
+  apt: 		  ["python3-opencv", "ca-certificates", "sudo",
              "cmake", "protobuf-compiler", "libprotobuf-dev"]
 }
 
 run { 
-  ln:         "-sv /usr/bin/python3 /usr/bin/python" 
-  bash:      ["-c", `wget https://bootstrap.pypa.io/get-pip.py && \
-python3 get-pip.py --user &&
-rm get-pip.py
-`]
-  bash:      ["-c", `/root/.local/bin/pip install --user tensorboard cython`]
-  //bash:      ["-c", `/root/.local/bin/pip install --user torch==1.5+cu101 torchvision==0.6+cu101 -f https://download.pytorch.org/whl/torch_stable.html`]
-  bash:      ["-c" `/root/.local/bin/pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html`]
-  bash:      ["-c", `/root/.local/bin/pip install --user 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'`]
-  bash:      ["-c", `/root/.local/bin/pip install --user 'git+https://github.com/facebookresearch/fvcore'`]
-  //bash:      ["-c", `/root/.local/bin/pip install --user detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/index.html`]
-  bash:      ["-c", `root/.local/bin/pip install --user detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cpu/index.html`]
-
-  // Install additional python packages
-  bash:      ["-c", `/root/.local/bin/pip install --user pandas notebook scikit-learn matplotlib`]
-
+  
+  bash:      ["-c", `python3 -m pip install tensorboard cython`]
+  bash:      ["-c" `python3 -m pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html`]
+  bash:      ["-c", `python3 -m pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'`]
+  bash:      ["-c", `python3 -m pip install 'git+https://github.com/facebookresearch/fvcore'`]
+  bash:      ["-c", `python3 -m pip install detectron2 -f \
+  https://dl.fbaipublicfiles.com/detectron2/wheels/cpu/torch1.6/index.html`] 
 }
 
 
 service {
-	name:		"detectron"
+	name:		"detectron-cpu"
+  image:  "detectron-cpu-1.0"
 	version:	"1.0"
 	ip: 		"10.0.0.10"
   ports:  "8888:8888"
 	resources {
 		ram: 	"4GB"
 		cpu: 	4
-		gpu:	false
+		gpu:	"no"
 	}
 }
