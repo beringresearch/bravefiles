@@ -58,16 +58,6 @@ run:
   args:
   - -c
   - jupyter notebook --generate-config
-- command: cat
-  args:
-  - |-
-    <<EOT >> /root/.jupyter/jupyter_notebook_config.py
-    import os
-    c = get_config()
-    os.environ["LD_LIBRARY_PATH"] = "/usr/local/cuda-10.2/lib64:/usr/local/cuda/lib64:"
-    os.environ["PATH"] = "/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    c.Spawner.env.update("LD_LIBRARY_PATH")
-    EOT
 service:
   image: ubuntu-bionic-mlbase-cuda-1.0
   name: ubuntu-bionic-mlbase-cuda
