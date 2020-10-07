@@ -11,13 +11,13 @@ system {
            "supervisor"]
 }
 
-copy {
-    jupyterServer {
-    source: "jupyter-server.conf"
-    target: "/etc/supervisor/conf.d"
-    action: ""
-  }
-}
+//copy {
+//    jupyterServer {
+//    source: "jupyter-server.conf"
+//    target: "/etc/supervisor/conf.d"
+//    action: ""
+//  }
+//}
 
 run {
   bash: ["-c", 'python3 -m pip install --upgrade pip']
@@ -32,8 +32,16 @@ rm -r dotfiles`]
 
   bash: ["-c", "python3 -m pip install --upgrade pip"]
   bash: ["-c", "python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons tensorflow-io"]
-  supervisorctl: "reload"
-  supervisorctl: "update"
+  bash: ["-c", "jupyter notebook --generate-config"]
+  cat: [">",  `/root/.jupyter/jupyter_notebook_config.py <<EOL
+import os
+c = get_config()
+os.environ["LD_LIBRARY_PATH"] = "/usr/local/cuda-10.2/lib64:/usr/local/cuda/lib64:"
+os.environ["PATH"] = "/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+c.Spawner.env.update("LD_LIBRARY_PATH")
+EOL`]
+  //supervisorctl: "reload"
+  //supervisorctl: "update"
 }
 
 service {
