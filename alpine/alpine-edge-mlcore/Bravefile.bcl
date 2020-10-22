@@ -1,0 +1,26 @@
+//Alpine ML Core environment
+base {
+	image: 		  "brave-base-alpine-edge-1.0"
+	location: 	"local"
+}
+
+system {
+  apk: 		["python3", "python3-dev", "py3-pip", "py3-numpy", "py3-scipy"]
+}
+
+run {	
+  pip3: "install xgboost"
+}
+
+service {
+	image:  "alpine-edge-mlcore-1.0"
+	docker: "no"
+	name:		"alpine-edge-mlcore"
+	version:	"1.0"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
