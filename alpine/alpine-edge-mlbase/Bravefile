@@ -119,4 +119,4 @@ service:
   resources:
     ram: 2GB
     cpu: 2
-    gpu: false
+    gpu: "no"

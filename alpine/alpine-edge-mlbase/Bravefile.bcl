@@ -52,7 +52,7 @@ service {
 	version:	"1.0"
 	ip: 		""
 	resources {
-		ram: 	"4GB"
+		ram: 	"2GB"
 		cpu: 	2
 		gpu:	"no"
 	}
