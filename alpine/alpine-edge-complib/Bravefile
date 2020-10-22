@@ -8,6 +8,7 @@ packages:
   - gfortran
   - g++
   - openblas
+  - cmake
   - lapack-dev
   - libexecinfo-dev
   - libstdc++
