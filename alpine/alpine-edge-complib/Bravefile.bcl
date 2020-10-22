@@ -5,7 +5,8 @@ base {
 }
 
 system {
-  apk: 		["make", "gfortran", "g++", "openblas", "cmake",
+  apk: 		["make", "gfortran", "g++", "openblas", "cmake", "gcc",
+           "libffi-dev", "libressl-dev", "musl-dev",
            "lapack-dev", "libexecinfo-dev", "libstdc++", "libgomp"]
 }
 

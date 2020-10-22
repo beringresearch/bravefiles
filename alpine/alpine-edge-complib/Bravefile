@@ -9,6 +9,10 @@ packages:
   - g++
   - openblas
   - cmake
+  - gcc
+  - libffi-dev
+  - libressl-dev
+  - musl-dev
   - lapack-dev
   - libexecinfo-dev
   - libstdc++
