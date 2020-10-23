@@ -1,15 +1,16 @@
 //Alpine ML Core environment
 base {
-	image: 		  "brave-base-alpine-edge-1.0"
-	location: 	"local"
+	image: 		  "beringresearch/bravefiles/alpine/alpine-edge-complib"
+	location: 	"github"
 }
 
 system {
-  apk: 		["python3", "python3-dev", "py3-pip", "py3-numpy", "py3-scipy"]
+  apk: 		["python3", "python3-dev", "py3-pip", "py3-numpy", "py3-scipy",
+           "ipython", "py3-scikit-learn"]
 }
 
-run {	
-  pip3: "install xgboost"
+run {	 
+  pip3: "install notebook matplotlib"
 }
 
 service {

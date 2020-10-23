@@ -1,6 +1,6 @@
 base:
-  image: brave-base-alpine-edge-1.0
-  location: local
+  image: beringresearch/bravefiles/alpine/alpine-edge-complib
+  location: github
 packages:
   manager: apk
   system:
@@ -9,11 +9,14 @@ packages:
   - py3-pip
   - py3-numpy
   - py3-scipy
+  - ipython
+  - py3-scikit-learn
 run:
 - command: pip3
   args:
   - install
-  - xgboost
+  - notebook
+  - matplotlib
 service:
   image: alpine-edge-mlcore-1.0
   name: alpine-edge-mlcore
