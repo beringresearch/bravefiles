@@ -1,0 +1,44 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - python3
+  - python3-pip
+run:
+- command: pip3
+  args:
+  - install
+  - --upgrade
+  - --no-cache-dir
+  - pip
+- command: pip3
+  args:
+  - install
+  - --no-cache-dir
+  - tensorflow
+  - ivis
+- command: pip3
+  args:
+  - install
+  - --no-cache-dir
+  - notebook
+  - scikit-learn
+  - pandas
+  - matplotlib
+- command: bash
+  args:
+  - -c
+  - apt-get clean
+service:
+  image: ubuntu-bionic-mlcore-1.0
+  name: ubuntu-bionic-mlcore
+  docker: "no"
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 2GB
+    cpu: 2
+    gpu: "no"
