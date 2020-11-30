@@ -1,0 +1,47 @@
+base:
+  image: debian/buster/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - wget
+  - python3-dev
+  - python3-pip
+  - git
+  - supervisor
+run:
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install --upgrade pip
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install numpy scikit-learn matplotlib seaborn notebook ipython
+    param holoviews datashader bokeh tensorflow-cpu
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install git+https://github.com/beringresearch/ivis
+- command: supervisorctl
+  args:
+  - reload
+- command: supervisorctl
+  args:
+  - update
+copy:
+- source: jupyter-server.conf
+  target: /etc/supervisor/conf.d
+service:
+  image: debian-buster-ivis-master-1.0
+  name: debian-buster-ivis-master
+  docker: "no"
+  version: "1.0"
+  ip: ""
+  ports:
+  - 8888:8888
+  resources:
+    ram: 2GB
+    cpu: 2
+    gpu: "no"

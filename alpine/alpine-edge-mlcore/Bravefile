@@ -1,0 +1,30 @@
+base:
+  image: beringresearch/bravefiles/alpine/alpine-edge-complib
+  location: github
+packages:
+  manager: apk
+  system:
+  - python3
+  - python3-dev
+  - py3-pip
+  - py3-numpy
+  - py3-scipy
+  - ipython
+  - py3-scikit-learn
+run:
+- command: pip3
+  args:
+  - install
+  - notebook
+  - matplotlib
+service:
+  image: alpine-edge-mlcore-1.0
+  name: alpine-edge-mlcore
+  docker: "no"
+  version: "1.0"
+  ip: ""
+  ports: []
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"

@@ -111,11 +111,12 @@ run:
   - --py
   - widgetsnbextension
 service:
+  image: alpine-edge-mlbase-1.0
   name: alpine-edge-mlbase
   version: "1.0"
   ip: ""
   ports: []
   resources:
-    ram: 4GB
+    ram: 2GB
     cpu: 2
-    gpu: false
+    gpu: "no"

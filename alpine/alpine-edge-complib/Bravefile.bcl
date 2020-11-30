@@ -1,0 +1,29 @@
+// Alpine base installation with libraries required for computational packages
+base {
+	image: 		"alpine/edge/amd64"
+	location: "public"
+}
+
+system {
+  apk: 		["make", "gfortran", "g++", "openblas", "cmake", "gcc",
+           "libffi-dev", "libressl-dev", "musl-dev",
+           "lapack-dev", "libexecinfo-dev", "libstdc++", "libgomp"]
+}
+
+//run {
+//	echo: 		"Hello World"
+//}
+
+service {
+	image: "alpine-edge-complib-1.0"
+	docker: "no"	
+	name:		"alpine-edge-complib"
+	version:	"1.0"
+	ip: 		""
+	ports:	""
+	resources {
+		ram: 	"2GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}

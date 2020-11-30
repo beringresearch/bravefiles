@@ -1,0 +1,30 @@
+//Ubuntu ML Core environment
+base {
+	image: 		  "ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+  apt: 		["python3", "python3-pip"]
+}
+
+run {	
+  pip3: "install --upgrade --no-cache-dir pip"
+  pip3: "install --no-cache-dir tensorflow ivis"
+  pip3: "install --no-cache-dir notebook scikit-learn pandas matplotlib"
+
+  bash: ["-c", "apt-get clean"]
+}
+
+service {
+	image:  "ubuntu-bionic-mlcore-1.0"
+	docker: "no"
+	name:		"ubuntu-bionic-mlcore"
+	version:	"1.0"
+	ip: 		""
+	resources {
+		ram: 	"2GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
