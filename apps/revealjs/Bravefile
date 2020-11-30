@@ -1,0 +1,45 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - git
+  - curl
+  - build-essential
+  - dirmngr
+  - apt-transport-https
+  - lsb-release
+  - ca-certificates
+run:
+- command: bash
+  args:
+  - -c
+  - curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+- command: bash
+  args:
+  - -c
+  - apt-get install -y nodejs
+- command: bash
+  args:
+  - -c
+  - git clone https://github.com/hakimel/reveal.js.git && cd reveal.js && npm install
+service:
+  image: revealjs-1.0
+  name: revealjs
+  docker: "no"
+  version: "1.0"
+  ip: ""
+  ports:
+  - 8000:8000
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"
+  postdeploy:
+    run:
+    - command: bash
+      args:
+      - -c
+      - cd /root/reveal.js && nohup npm start &

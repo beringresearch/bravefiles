@@ -35,15 +35,13 @@ ln -s locale.h /usr/include/xlocale.h`]
 
   apk: "add --no-cache --virtual=.build-deps gcc musl-dev libffi-dev gfortran openblas-dev py3-numpy-dev freetype-dev libpng-dev build-base linux-headers python3-dev git cmake jpeg-dev bash"
 
-  pip3: "install -U --no-cache-dir Cython pyyaml pymkl cffi matplotlib ipywidgets notebook requests pillow pandas seaborn"
+  pip3: "install -U --no-cache-dir Cython pyyaml pymkl cffi matplotlib notebook requests pillow pandas seaborn"
 
   rm: "/usr/include/xlocale.h"
   rm: "-rf /root/.cache"
   rm: "-rf /root/.[acpw]*"
   rm: "-rf /var/cache/apk/*"
-   
-  jupyter: "nbextension enable --py widgetsnbextension"
-  
+
 }
 
 service {

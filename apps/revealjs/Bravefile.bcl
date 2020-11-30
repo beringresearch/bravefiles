@@ -1,0 +1,35 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["bash", "git", "curl", "build-essential",
+"dirmngr", "apt-transport-https", "lsb-release", "ca-certificates"]
+}
+
+run {
+    bash: ["-c", "curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -"]
+    bash: ["-c", "apt-get install -y nodejs"]
+    bash: ["-c", "git clone https://github.com/hakimel/reveal.js.git && cd reveal.js && npm install"]
+}
+
+service {
+	docker:   "no"
+	image:		"revealjs-1.0"
+	name:		"revealjs"
+	version:	"1.0"
+  ports: "8000:8000"
+	ip: 		""
+postdeploy {
+  run {
+  bash: ["-c", "cd /root/reveal.js && nohup npm start &"]
+}
+}
+resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
