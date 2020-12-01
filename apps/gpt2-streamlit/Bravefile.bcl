@@ -1,0 +1,45 @@
+//BCL File example
+base {
+	image: 		  "ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+  apt: 		["bash", "python3", "python3-pip", "supervisor"]
+}
+
+copy {
+  script {
+    source: "gpt2_run.py"
+    target: "/root/"
+    action: ""
+  }
+
+  supervisor {
+    source: "supervisord.conf"
+    target: "/etc/supervisor/conf.d/"
+    action: ""
+}
+}
+
+run {
+  bash: ["-c", "python3 -m pip install --upgrade pip"]
+  bash: ["-c", "python3 -m pip install tensorflow transformers streamlit"]
+  python3: ["-c", `from transformers import TFGPT2LMHeadModel, GPT2Tokenizer;
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2");
+model = TFGPT2LMHeadModel.from_pretrained("gpt2", pad_token_id=tokenizer.eos_token_id)`]	
+}
+
+service {
+	docker: "no"
+	image:	"gpt2-streamlit-1.0"
+	name:		"gpt2-streamlit"
+	version:	"1.0"
+	ip: 		""
+  ports: "8501:8501"
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}

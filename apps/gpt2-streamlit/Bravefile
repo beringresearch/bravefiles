@@ -1,0 +1,43 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - python3
+  - python3-pip
+  - supervisor
+run:
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install --upgrade pip
+- command: bash
+  args:
+  - -c
+  - python3 -m pip install tensorflow transformers streamlit
+- command: python3
+  args:
+  - -c
+  - |-
+    from transformers import TFGPT2LMHeadModel, GPT2Tokenizer;
+    tokenizer = GPT2Tokenizer.from_pretrained("gpt2");
+    model = TFGPT2LMHeadModel.from_pretrained("gpt2", pad_token_id=tokenizer.eos_token_id)
+copy:
+- source: gpt2_run.py
+  target: /root/
+- source: supervisord.conf
+  target: /etc/supervisor/conf.d/
+service:
+  image: gpt2-streamlit-1.0
+  name: gpt2-streamlit
+  docker: "no"
+  version: "1.0"
+  ip: ""
+  ports:
+  - 8501:8501
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"
