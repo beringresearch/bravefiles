@@ -1,0 +1,30 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["wget"]
+}
+
+run {
+  wget: "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin"
+  sudo: "mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600"
+  sudo: "apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub"
+  sudo: 'add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"'
+  sudo: "apt-get update"
+}
+
+service {
+	docker: "no"
+	image:		"ubuntu-bionic-cuda110-1.0"
+	name:		"ubuntu-bionic-cuda110"
+	version:	"1.0"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"yes"
+	}
+}
