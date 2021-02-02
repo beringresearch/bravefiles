@@ -1,0 +1,39 @@
+//BCL File example
+base {
+	image: 		"ubuntu/focal/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["python3-pip"]
+}
+
+run {
+  python3: "-m pip install apache-airflow"
+  airflow: "db init"
+  airflow: `users create --username admin
+--password admin
+--firstname admin
+--lastname admin
+--role Admin
+--email admin@admin.com`
+}
+
+service {
+	image: "airflow-1.0"
+	docker: "no"	
+	name:		"airflow"
+	version:	"1.0"
+	ip: 		""
+	ports:		"8080:8080"
+  postdeploy {
+  run {
+    airflow: "webserver --port 8080"
+}
+}
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
