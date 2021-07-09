@@ -1,0 +1,31 @@
+//BCL File example
+base {
+	image: 		"ubuntu/focal/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["wget", "curl", "git"]
+}
+
+run {
+	wget: 		"https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz"
+  tar:  "-xvf go1.16.4.linux-amd64.tar.gz"
+  mv: "go /usr/local"
+  echo: "GOPATH=$HOME/go >> .bashrc"
+  echo: "PATH=$PATH:/usr/local/go/bin:$GOPATH/bin >> .bashrc"
+  rm: "go1.16.4.linux-amd64.tar.gz"
+  }
+
+service {
+	image: "go-1.16.4"
+	docker: "no"	
+	name:		"go"
+	version:	"1.16.4"
+	ip: 		""
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}

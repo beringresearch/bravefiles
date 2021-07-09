@@ -1,0 +1,43 @@
+base:
+  image: ubuntu/focal/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - wget
+  - curl
+  - git
+run:
+- command: sh
+  args:
+  - -c
+  - wget https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz
+- command: sh
+  args:
+  - -c
+  - tar -xvf go1.16.4.linux-amd64.tar.gz
+- command: sh
+  args:
+  - -c
+  - mv go /usr/local
+- command: sh
+  args:
+  - -c
+  - echo GOPATH=$HOME/go >> .bashrc
+- command: sh
+  args:
+  - -c
+  - echo PATH=$PATH:/usr/local/go/bin:$GOPATH/bin >> .bashrc
+- command: sh
+  args:
+  - -c
+  - rm go1.16.4.linux-amd64.tar.gz
+service:
+  image: go-1.16.4
+  name: go
+  docker: "no"
+  version: 1.16.4
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"
