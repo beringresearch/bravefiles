@@ -1,0 +1,37 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["bash", "python3", "python3-pip", "supervisor"]
+}
+
+copy {
+  mlflowServer {
+  source: "mlflow-server.conf"
+  target: "/etc/supervisor/conf.d"
+  action: ""
+  }
+}
+
+run {	
+  python3: "-m pip install mlflow"
+  supervisorctl: "reload"
+  supervisorctl: "update"
+}
+
+service {
+	image: "mlflow-1.0"
+	docker: "no"	
+	name:		"mlflow"
+	version:	"1.0"
+	ip: 		"10.0.0.11"
+	ports:	["4040:4040", "5000:5000"]
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
