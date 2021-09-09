@@ -1,0 +1,27 @@
+base:
+  image: ubuntu/focal/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - curl
+  - build-essential
+  - python3
+  - python3-pip
+run:
+- command: sh
+  args:
+  - -c
+  - python3 -m pip install label-studio
+service:
+  image: label-studio-1.0
+  name: label-studio
+  docker: "no"
+  version: "1.0"
+  ports:
+  - 8080:8080
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"

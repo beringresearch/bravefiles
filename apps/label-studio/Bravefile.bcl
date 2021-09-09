@@ -1,0 +1,28 @@
+//BCL File example
+base {
+	image: 		"ubuntu/focal/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["bash", "curl", "build-essential", "python3", "python3-pip"]
+}
+
+run {
+  //curl: "https://sh.rustup.rs -sSf | sh -s -- -y"
+  python3: "-m pip install label-studio" 
+}
+
+service {
+	image: "label-studio-1.0"
+	docker: "no"	
+	name:		"label-studio"
+	version:	"1.0"
+	ip: 		""
+	ports:	"8080:8080"
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}

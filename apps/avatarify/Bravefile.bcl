@@ -1,0 +1,33 @@
+base {
+	image: 		  "ubuntu/focal/amd64"
+	location: 	"public"
+}
+
+system {
+    apt: 		["wget", "python3", "git"]
+}
+
+run {
+	wget: "https://openavatarify.s3.amazonaws.com/weights/vox-adv-cpk.pth.tar"
+  wget: "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+  bash: "Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda"
+  
+  bash: `-c git clone https://github.com/alievk/avatarify.git &
+cd avatarify
+bash scripts/install.sh` 
+}
+
+service {
+	image: "avatarify-1.0"
+	docker: "no"	
+	name:		"avatarify"
+	version:	"1.0"
+	ip: 		""
+	ports:		""	
+	}
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
