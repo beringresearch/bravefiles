@@ -28,7 +28,7 @@ service {
 	docker: "no"	
 	name:		"vsftp"
 	version:	"1.0"
-  ports: "20:20"
+  ports: "21:21"
 	ip: 		"10.0.0.12"	
 	resources {
 		ram: 	"4GB"
