@@ -1,0 +1,41 @@
+base:
+  image: ubuntu/bionic/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - bash
+  - vsftpd
+run:
+- command: sh
+  args:
+  - -c
+  - sudo systemctl start vsftpd
+- command: sh
+  args:
+  - -c
+  - sudo systemctl enable vsftpd
+- command: sh
+  args:
+  - -c
+  - sudo useradd -m ftpuser
+- command: sh
+  args:
+  - -c
+  - sudo echo 'ftpuser:bering' | chpasswd
+copy:
+- source: vsftpd.conf
+  target: /etc/
+  action: sudo chown root /etc/vsftpd.conf
+service:
+  image: vsftp-1.0
+  name: vsftp
+  docker: "no"
+  version: "1.0"
+  ip: 10.0.0.12
+  ports:
+  - "20:20"
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"

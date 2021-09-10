@@ -1,0 +1,38 @@
+//BCL File example
+base {
+	image: 		"ubuntu/bionic/amd64"
+	location: 	"public"
+}
+
+system {
+    apt: 		["bash", "vsftpd"]
+}
+
+copy {
+  mlflowServer {
+  source: "vsftpd.conf"
+  target: "/etc/"
+  action: "sudo chown root /etc/vsftpd.conf"
+  }
+}
+
+run {
+	sudo: 		"systemctl start vsftpd"
+  sudo:     "systemctl enable vsftpd"
+  sudo:     "useradd -m ftpuser"
+  sudo:     "echo 'ftpuser:bering' | chpasswd" 
+}
+
+service {
+	image: "vsftp-1.0"
+	docker: "no"	
+	name:		"vsftp"
+	version:	"1.0"
+  ports: "20:20"
+	ip: 		"10.0.0.12"	
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
