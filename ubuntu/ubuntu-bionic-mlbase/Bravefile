@@ -1,5 +1,5 @@
 base:
-  image: ubuntu/bionic/amd64
+  image: ubuntu/focal/amd64
   location: public
 packages:
   manager: apt
@@ -14,31 +14,32 @@ packages:
   - wget
   - tmux
   - curl
+  - software-properties-common
   - texlive-xetex
   - texlive-fonts-recommended
-  - texlive-generic-recommended
+  - texlive-latex-recommended
   - pandoc
   - supervisor
 run:
-- command: bash
+- command: sh
   args:
   - -c
   - python3 -m pip install --upgrade pip
-- command: bash
+- command: sh
   args:
   - -c
-  - python3 -m pip install git+https://github.com/beringresearch/datasets
-- command: bash
+  - python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn
+    notebook ipython ivis streamlit
+- command: sh
   args:
   - -c
-  - python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn notebook ipython ivis streamlit
-- command: curl
+  - python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons
+    tensorflow-io
+- command: sh
   args:
-  - -fLo
-  - /root/.vim/autoload/plug.vim
-  - --create-dirs
-  - https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-- command: bash
+  - -c
+  - curl -fLo /root/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+- command: sh
   args:
   - -c
   - |-
@@ -46,20 +47,14 @@ run:
     cp dotfiles/.vimrc . && \
     cp dotfiles/.tmux.conf . && \
     rm -r dotfiles
-- command: bash
+- command: sh
   args:
   - -c
-  - python3 -m pip install --upgrade pip
-- command: bash
+  - supervisorctl reload
+- command: sh
   args:
   - -c
-  - python3 -m pip install --upgrade tensorflow tensorflow-datasets tensorflow-addons tensorflow-io
-- command: supervisorctl
-  args:
-  - reload
-- command: supervisorctl
-  args:
-  - update
+  - supervisorctl update
 copy:
 - source: jupyter-server.conf
   target: /etc/supervisor/conf.d
@@ -67,7 +62,6 @@ service:
   image: ubuntu-bionic-mlbase-1.0
   name: ubuntu-bionic-mlbase
   version: "1.0"
-  ip: ""
   ports:
   - 8888:8888
   resources:
