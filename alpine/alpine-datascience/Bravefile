@@ -1,0 +1,24 @@
+base:
+  image: alpine/edge/amd64
+  location: public
+packages:
+  manager: apk
+  system:
+  - python3-dev
+  - python3
+  - py3-pip
+  - py3-numpy
+  - py3-pandas
+  - py3-scikit-learn
+  - ipython
+service:
+  image: alpine-python-pandas-sklearn-1.0
+  name: alpine-python-pandas-sklearn
+  docker: "no"
+  version: "1.0"
+  ports:
+  - ""
+  resources:
+    ram: 2GB
+    cpu: 2
+    gpu: "no"
