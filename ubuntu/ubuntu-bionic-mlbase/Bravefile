@@ -9,6 +9,7 @@ packages:
   - python3-pip
   - git
   - python3-opencv
+  - htop
   - sudo
   - g++
   - wget
@@ -29,7 +30,7 @@ run:
   args:
   - -c
   - python3 -m pip install transformers pandas numpy scikit-learn matplotlib seaborn
-    notebook ipython ivis streamlit
+    notebook ipython ivis streamlit gensim
 - command: sh
   args:
   - -c
