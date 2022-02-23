@@ -1,0 +1,41 @@
+//BCL File example
+base {
+	image: 		"ubuntu/focal/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["wget", "gnupg"]
+}
+
+copy {
+	FileName {
+	source:		"/file/or/directory"
+	target: 	"/file/or/directory"
+	action: 	 "chmod 0700 /file/or/directory"
+	}
+}
+
+run {
+ wget: "-qO- https://dl.packager.io/srv/opf/openproject/key | sudo apt-key add -"
+ wget: "-O /etc/apt/sources.list.d/openproject.list \
+  https://dl.packager.io/srv/opf/openproject/stable/12/installer/ubuntu/20.04.repo"
+ apt-get: "update"
+ apt-get: "install openproject"
+
+}
+
+service {
+	image: "openproject-1.0"
+	docker: "no"	
+	name:		"openproject"
+	version:	"1.0"
+	ip: 		""
+	ports:		"80:8080"	
+	}
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
