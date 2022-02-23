@@ -1,0 +1,27 @@
+base:
+  image: ubuntu/focal/amd64
+  location: public
+packages:
+  manager: apt
+  system:
+  - curl
+run:
+- command: sh
+  args:
+  - -c
+  - curl -fsSL https://code-server.dev/install.sh | sh
+- command: sh
+  args:
+  - -c
+  - systemctl enable --now code-server@$USER
+service:
+  image: code-server-1.0
+  name: code-server
+  docker: "no"
+  version: "1.0"
+  ports:
+  - 8080:8080
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"

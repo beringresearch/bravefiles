@@ -1,0 +1,28 @@
+//BCL File example
+base {
+	image: 		"ubuntu/focal/amd64"
+	location: "public"
+}
+
+system {
+    apt: 		["curl"]
+}
+
+run {
+  curl: "-fsSL https://code-server.dev/install.sh | sh"
+  systemctl: "enable --now code-server@$USER"
+}
+
+service {
+	image: "code-server-1.0"
+	docker: "no"	
+	name:		"code-server"
+	version:	"1.0"
+	ip: 		""
+	ports:		"8080:8080"
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}
