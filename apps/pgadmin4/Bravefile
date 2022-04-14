@@ -1,0 +1,63 @@
+base:
+  image: alpine/edge/arm64
+  location: public
+packages:
+  manager: apk
+  system:
+  - python3
+  - python3-dev
+  - py3-pip
+  - build-base
+  - gcc
+  - musl-dev
+  - libffi-dev
+  - zlib-dev
+  - jpeg-dev
+  - supervisor
+run:
+- command: sh
+  args:
+  - -c
+  - cp pgadmin.conf /etc/supervisord.conf
+- command: sh
+  args:
+  - -c
+  - rm pgadmin.conf
+- command: sh
+  args:
+  - -c
+  - mkdir /var/lib/pgadmin
+- command: sh
+  args:
+  - -c
+  - mkdir /var/log/pgadmin
+- command: sh
+  args:
+  - -c
+  - python3 -m pip install pgadmin4
+- command: sh
+  args:
+  - -c
+  - rc-update add supervisord
+- command: sh
+  args:
+  - -c
+  - ash /etc/init.d/supervisord start
+- command: sh
+  args:
+  - -c
+  - ash /etc/init.d/supervisord restart
+copy:
+- source: pgadmin.conf
+  target: /root/
+service:
+  image: pgadmin-1.0
+  name: pgadmin
+  docker: "no"
+  version: "1.0"
+  ports:
+  - 5050:5050
+  resources:
+    ram: 1GB
+    cpu: 1
+    gpu: "no"

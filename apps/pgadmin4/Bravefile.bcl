@@ -1,0 +1,44 @@
+//BCL File example
+base {
+	image: 		"alpine/edge/arm64"
+	location: "public"
+}
+
+system {
+    apk: 		["python3", "python3-dev", "py3-pip", "build-base",
+             "gcc", "musl-dev", "libffi-dev", "zlib-dev", "jpeg-dev",
+             "supervisor"]
+}
+
+copy  {
+  config{
+  source: "pgadmin.conf"
+  target: "/root/"
+  action: ""
+  }
+}
+
+run {
+  cp: "pgadmin.conf /etc/supervisord.conf"
+  rm: "pgadmin.conf"
+	mkdir: "/var/lib/pgadmin"
+  mkdir: "/var/log/pgadmin" 
+  python3: "-m pip install pgadmin4"
+  rc-update: "add supervisord"
+  ash: "/etc/init.d/supervisord start"
+  ash: "/etc/init.d/supervisord restart" 
+}
+
+service {
+	image: "pgadmin-1.0"
+	docker: "no"	
+	name:		"pgadmin"
+	version:	"1.0"
+	ip: 		""
+	ports:		"5050:5050"
+	resources {
+		ram: 	"1GB"
+		cpu: 	1
+		gpu:	"no"
+	}
+}
