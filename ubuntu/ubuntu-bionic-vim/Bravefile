@@ -36,6 +36,7 @@ run:
   - /dev/null
 service:
   name: ubuntu-bionic-vim
+  image: ubuntu-bionic-vim-1.0
   version: "1.0"
   ip: ""
   ports: []

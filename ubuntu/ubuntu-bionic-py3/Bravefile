@@ -25,6 +25,7 @@ run:
   - matplotlib
 service:
   name: ubuntu-bionic-py3
+  image: ubuntu-bionic-py3-1.0
   version: "1.0"
   ip: ""
   ports: []

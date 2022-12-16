@@ -17,6 +17,7 @@ run:
   - $HOME/miniconda
 service:
   name: ubuntu-bionic-miniconda3
+  image: ubuntu-bionic-miniconda3-1.0
   version: "1.0"
   ip: ""
   ports: []

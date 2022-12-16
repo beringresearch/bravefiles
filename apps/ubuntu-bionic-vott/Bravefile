@@ -33,6 +33,7 @@ run:
     npm ci
 service:
   name: ubuntu-bionic-vott
+  image: ubuntu-bionic-vott-1.0
   version: "1.0"
   ip: ""
   ports:

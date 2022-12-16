@@ -40,6 +40,7 @@ run:
   - /root/.local/bin/pip install --user ipython pandas notebook scikit-learn matplotlib
 service:
   name: pytorch
+  image: pytorch-1.5
   version: "1.5"
   ip: ""
   ports: []

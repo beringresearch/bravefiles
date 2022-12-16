@@ -45,6 +45,7 @@ run:
     sacremoses
 service:
   name: fairseq
+  image: fairseq-1.0
   version: "1.0"
   ip: 10.0.0.10
   ports:
