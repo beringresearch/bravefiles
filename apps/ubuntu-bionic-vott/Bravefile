@@ -1,3 +1,4 @@
+image: ubuntu-bionic-vott/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -33,8 +34,6 @@ run:
     npm ci
 service:
   name: ubuntu-bionic-vott
-  image: ubuntu-bionic-vott-1.0
-  version: "1.0"
   ip: ""
   ports:
   - 3000:3000

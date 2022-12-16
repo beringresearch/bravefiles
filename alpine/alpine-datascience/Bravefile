@@ -1,3 +1,4 @@
+image: alpine-python-pandas-sklearn/1.0
 base:
   image: alpine/edge/amd64
   location: public
@@ -12,10 +13,8 @@ packages:
   - py3-scikit-learn
   - ipython
 service:
-  image: alpine-python-pandas-sklearn-1.0
   name: alpine-python-pandas-sklearn
   docker: "no"
-  version: "1.0"
   ports:
   - ""
   resources:

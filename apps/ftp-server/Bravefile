@@ -1,3 +1,4 @@
+image: vsftp/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -28,10 +29,8 @@ copy:
   target: /etc/
   action: sudo chown root /etc/vsftpd.conf
 service:
-  image: vsftp-1.0
   name: vsftp
   docker: "no"
-  version: "1.0"
   ip: 10.0.0.12
   ports:
   - "21:21"

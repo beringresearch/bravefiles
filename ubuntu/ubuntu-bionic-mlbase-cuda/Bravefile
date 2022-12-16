@@ -1,3 +1,4 @@
+image: ubuntu-bionic-mlbase-cuda/1.0
 base:
   image: ubuntu-bionic-cuda-101-1.0
   location: local
@@ -59,9 +60,7 @@ run:
   - -c
   - jupyter notebook --generate-config
 service:
-  image: ubuntu-bionic-mlbase-cuda-1.0
   name: ubuntu-bionic-mlbase-cuda
-  version: "1.0"
   ip: ""
   ports:
   - 8888:8888

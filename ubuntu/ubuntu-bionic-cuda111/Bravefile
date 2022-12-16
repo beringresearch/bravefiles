@@ -1,3 +1,4 @@
+image: ubuntu-bionic-cuda110/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -90,10 +91,8 @@ run:
   - -c
   - rm *.deb
 service:
-  image: ubuntu-bionic-cuda110-1.0
   name: ubuntu-bionic-cuda110
   docker: "no"
-  version: "1.0"
   resources:
     ram: 4GB
     cpu: 2

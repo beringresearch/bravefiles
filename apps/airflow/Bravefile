@@ -1,3 +1,4 @@
+image: airflow/1.0
 base:
   image: ubuntu/focal/amd64
   location: public
@@ -20,10 +21,8 @@ run:
   - airflow users create --username admin --password admin --firstname admin --lastname
     admin --role Admin --email admin@admin.com
 service:
-  image: airflow-1.0
   name: airflow
   docker: "no"
-  version: "1.0"
   ports:
   - 8080:8080
   resources:

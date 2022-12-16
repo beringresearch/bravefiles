@@ -1,3 +1,4 @@
+image: ubuntu-bionic-cuda-101/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -53,10 +54,8 @@ run:
   - -c
   - echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc
 service:
-  image: ubuntu-bionic-cuda-101-1.0
   name: ubuntu-bionic-cuda-101
   docker: "no"
-  version: "1.0"
   ip: ""
   ports: []
   resources:

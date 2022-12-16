@@ -1,3 +1,4 @@
+image: alpine-edge-mlcore/1.0
 base:
   image: beringresearch/bravefiles/alpine/alpine-edge-complib
   location: github
@@ -18,10 +19,8 @@ run:
   - notebook
   - matplotlib
 service:
-  image: alpine-edge-mlcore-1.0
   name: alpine-edge-mlcore
   docker: "no"
-  version: "1.0"
   ip: ""
   ports: []
   resources:

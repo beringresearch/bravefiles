@@ -1,3 +1,4 @@
+image: gpt2-streamlit/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -30,10 +31,8 @@ copy:
 - source: supervisord.conf
   target: /etc/supervisor/conf.d/
 service:
-  image: gpt2-streamlit-1.0
   name: gpt2-streamlit
   docker: "no"
-  version: "1.0"
   ip: ""
   ports:
   - 8501:8501
