@@ -22,8 +22,6 @@ service:
   name: alpine-edge-complib
   docker: "no"
   ip: ""
-  ports:
-  - ""
   resources:
     ram: 2GB
     cpu: 2

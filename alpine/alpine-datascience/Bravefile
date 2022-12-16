@@ -15,8 +15,6 @@ packages:
 service:
   name: alpine-python-pandas-sklearn
   docker: "no"
-  ports:
-  - ""
   resources:
     ram: 2GB
     cpu: 2

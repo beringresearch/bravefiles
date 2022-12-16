@@ -44,8 +44,6 @@ service:
   name: ubuntu-bionic-microk8s
   docker: "yes"
   ip: ""
-  ports:
-  - ""
   resources:
     ram: 4GB
     cpu: 2
