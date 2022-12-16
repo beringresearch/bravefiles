@@ -1,3 +1,4 @@
+image: pytorch/1.5
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -40,7 +41,6 @@ run:
   - /root/.local/bin/pip install --user ipython pandas notebook scikit-learn matplotlib
 service:
   name: pytorch
-  version: "1.5"
   ip: ""
   ports: []
   resources:

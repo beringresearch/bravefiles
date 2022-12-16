@@ -1,3 +1,4 @@
+image: ubuntu-bionic-py3/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -25,7 +26,6 @@ run:
   - matplotlib
 service:
   name: ubuntu-bionic-py3
-  version: "1.0"
   ip: ""
   ports: []
   resources:

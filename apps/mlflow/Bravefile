@@ -1,3 +1,4 @@
+image: mlflow/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -25,10 +26,8 @@ copy:
 - source: mlflow-server.conf
   target: /etc/supervisor/conf.d
 service:
-  image: mlflow-1.0
   name: mlflow
   docker: "no"
-  version: "1.0"
   ip: 10.0.0.11
   ports:
   - 4040:4040

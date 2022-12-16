@@ -1,3 +1,4 @@
+image: ubuntu-bionic-r/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -53,9 +54,7 @@ run:
   - -c
   - Rscript -e 'install.packages(c("Seurat", "dplyr"))'
 service:
-  image: ubuntu-bionic-r-1.0
   name: ubuntu-bionic-r
-  version: "1.0"
   ip: ""
   ports: []
   resources:

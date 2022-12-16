@@ -1,3 +1,4 @@
+image: brave-mlbase/1.0
 base:
   image: debian/buster/amd64
   location: public
@@ -27,10 +28,8 @@ run:
     numpy pandas scikit-learn matplotlib \
     tensorflow ipython notebook ivis shap
 service:
-  image: brave-mlbase-1.0
   name: brave-mlbase
   docker: "no"
-  version: "1.0"
   ip: ""
   ports: []
   resources:

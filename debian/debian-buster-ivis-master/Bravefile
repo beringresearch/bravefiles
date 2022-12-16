@@ -1,3 +1,4 @@
+image: debian-buster-ivis-master/1.0
 base:
   image: debian/buster/amd64
   location: public
@@ -34,10 +35,8 @@ copy:
 - source: jupyter-server.conf
   target: /etc/supervisor/conf.d
 service:
-  image: debian-buster-ivis-master-1.0
   name: debian-buster-ivis-master
   docker: "no"
-  version: "1.0"
   ip: ""
   ports:
   - 8888:8888

@@ -1,3 +1,4 @@
+image: detectron-cpu/1.0
 base:
   image: beringresearch/bravefiles/ubuntu/ubuntu-bionic-mlbase
   location: github
@@ -34,9 +35,7 @@ run:
     python3 -m pip install detectron2 -f \
       https://dl.fbaipublicfiles.com/detectron2/wheels/cpu/torch1.6/index.html
 service:
-  image: detectron-cpu-1.0
   name: detectron-cpu
-  version: "1.0"
   ip: 10.0.0.10
   ports:
   - 8888:8888

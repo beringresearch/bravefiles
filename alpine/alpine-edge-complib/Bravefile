@@ -1,3 +1,4 @@
+image: alpine-edge-complib/1.0
 base:
   image: alpine/edge/amd64
   location: public
@@ -18,13 +19,9 @@ packages:
   - libstdc++
   - libgomp
 service:
-  image: alpine-edge-complib-1.0
   name: alpine-edge-complib
   docker: "no"
-  version: "1.0"
   ip: ""
-  ports:
-  - ""
   resources:
     ram: 2GB
     cpu: 2

@@ -1,3 +1,4 @@
+image: go/1.16.4
 base:
   image: ubuntu/focal/amd64
   location: public
@@ -33,10 +34,8 @@ run:
   - -c
   - rm go1.16.4.linux-amd64.tar.gz
 service:
-  image: go-1.16.4
   name: go
   docker: "no"
-  version: 1.16.4
   resources:
     ram: 4GB
     cpu: 2

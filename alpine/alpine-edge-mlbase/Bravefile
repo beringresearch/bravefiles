@@ -1,3 +1,4 @@
+image: alpine-edge-mlbase/1.0
 base:
   image: alpine/edge/amd64
   location: public
@@ -111,9 +112,7 @@ run:
   - --py
   - widgetsnbextension
 service:
-  image: alpine-edge-mlbase-1.0
   name: alpine-edge-mlbase
-  version: "1.0"
   ip: ""
   ports: []
   resources:

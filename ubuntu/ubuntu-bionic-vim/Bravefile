@@ -1,3 +1,4 @@
+image: ubuntu-bionic-vim/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -36,7 +37,6 @@ run:
   - /dev/null
 service:
   name: ubuntu-bionic-vim
-  version: "1.0"
   ip: ""
   ports: []
   resources:

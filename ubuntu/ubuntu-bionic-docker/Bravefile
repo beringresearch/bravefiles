@@ -1,3 +1,4 @@
+image: ubuntu-bionic-docker/1.0
 base:
   image: ubuntu/bionic/amd64
   location: public
@@ -31,10 +32,8 @@ run:
   - -c
   - apt-get install -y docker-ce docker-ce-cli containerd.io
 service:
-  image: ubuntu-bionic-docker-1.0
   name: ubuntu-bionic-docker
   docker: "yes"
-  version: "1.0"
   resources:
     ram: 8GB
     cpu: 4
