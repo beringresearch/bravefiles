@@ -1,0 +1,20 @@
+image: node/14
+base:
+  image: ubuntu/focal
+  location: public
+packages:
+  manager: apt
+  system:
+  - gcc
+  - g++
+  - make
+  - curl
+run:
+- command: sh
+  args:
+  - -c
+  - curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+- command: sh
+  args:
+  - -c
+  - apt -y install nodejs

@@ -1,0 +1,19 @@
+//BCL File example
+image {
+	name: "node/14"
+}
+
+system {
+apt: ["gcc", "g++", "make", "curl"]
+
+}
+
+base {
+	image: 		"ubuntu/focal"
+	location: 	"public"
+}
+
+run {
+	curl: "-sL https://deb.nodesource.com/setup_14.x | sudo bash -"
+  apt: "-y install nodejs"
+}
