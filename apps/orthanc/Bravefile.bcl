@@ -1,0 +1,28 @@
+//BCL File example
+image {
+	name: "orthanc/1.10.0"
+}
+base {
+	image: 		"ubuntu/jammy"
+	location: 	"public"
+}
+
+system {
+    apt: 		["orthanc"]
+}
+
+service {
+	image: "orthanc/1.10.0"
+	docker: "no"	
+	name:		"orthanc"
+	profile: 	""
+	network:	""
+	storage:	""
+	ip: 		""
+	ports:		"8042:8042"
+	resources {
+		ram: 	"4GB"
+		cpu: 	2
+		gpu:	"no"
+	}
+}

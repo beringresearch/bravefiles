@@ -1,0 +1,18 @@
+image: orthanc/1.10.0
+base:
+  image: ubuntu/jammy
+  location: public
+packages:
+  manager: apt
+  system:
+  - orthanc
+service:
+  image: orthanc/1.10.0
+  name: orthanc
+  docker: "no"
+  ports:
+  - 8042:8042
+  resources:
+    ram: 4GB
+    cpu: 2
+    gpu: "no"
