@@ -1,33 +1,24 @@
 //BCL File example
 base {
-	image: 		"alpine/edge"
+	image: 		"ubuntu/focal"
 	location: "public"
 }
 
 system {
-    apk: 		["python3", "python3-dev", "py3-pip", "build-base",
-             "gcc", "musl-dev", "libffi-dev", "zlib-dev", "jpeg-dev",
-             "supervisor"]
+    apk: 		["wget"] 
 }
 
 copy  {
   config{
-  source: "pgadmin.conf"
+  source: "install.sh"
   target: "/root/"
   action: ""
   }
 }
 
 run {
-  cp: "pgadmin.conf /etc/supervisord.conf"
-  rm: "pgadmin.conf"
-	mkdir: "/var/lib/pgadmin"
-  mkdir: "/var/log/pgadmin" 
-  python3: "-m pip install pgadmin4"
-  rc-update: "add supervisord"
-  ash: "/etc/init.d/supervisord start"
-  ash: "/etc/init.d/supervisord restart" 
-}
+bash: "/root/isntall.sh"
+ }
 
 service {
 	image: "pgadmin-1.0"
